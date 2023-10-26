@@ -118,7 +118,6 @@ body {
     background: transparent;
     padding: 10px 30px;
     cursor: pointer;
-    margin: -7px;
     position: relative;
     outline: none;
     transition: background-color 0.3s, color 0.3s;
@@ -131,7 +130,7 @@ body {
 #submit-btn {
     margin: 90px 20px;
     border-radius: 20px;
-    padding: 10px;
+    padding: 10px 30px;
     cursor: pointer;
     box-shadow: 3px 3px 3px black;
     transition: background-color 0.3s, color 0.3s;

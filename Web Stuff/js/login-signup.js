@@ -4,14 +4,14 @@ function login() {
     const signupForm = document.getElementById("signup");
     const loginBtn = document.getElementById("login-btn");
     const signupBtn = document.getElementById("signup-btn");
+    formBorder.style.height = "400px";
+    formBorder.style.transition = "height 0.6s";
     loginForm.style.visibility = "visible";
     signupForm.style.visibility = "hidden";
     loginBtn.style.backgroundColor = "#d098fb";
     loginBtn.style.color = "white";
     signupBtn.style.background = "transparent";
     signupBtn.style.cursor = "pointer";
-    formBorder.style.height = "400px";
-    formBorder.style.transition = "height 0.6s";
 }
 function signup() {
     const formBorder = document.getElementById("login-signup-form");
@@ -19,15 +19,14 @@ function signup() {
     const signupForm = document.getElementById("signup");
     const loginBtn = document.getElementById("login-btn");
     const signupBtn = document.getElementById("signup-btn");
+    formBorder.style.height = "600px";
+    formBorder.style.transition = "height 0.6s";
     loginForm.style.visibility = "hidden";
     signupForm.style.visibility = "visible";
-    formBorder.style.height = "600px";
+    signupForm.style.marginLeft = "50px";
+    signupForm.style.marginTop = "-350px";
     signupBtn.style.backgroundColor = "#d098fb";
     signupBtn.style.color = "white";
     loginBtn.style.cursor = "pointer";
     loginBtn.style.background = "transparent";
-    formBorder.style.transition = "height 0.6s";
-    signupForm.style.marginLeft = "50px";
-    signupForm.style.marginTop = "-350px";
-
 }

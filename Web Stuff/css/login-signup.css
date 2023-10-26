@@ -11,7 +11,7 @@ body {
     padding: 0;
 }
 
-.login-signup-form {
+#login-signup-form {
     height: 400px;
     width: 375px;
     margin: 0 auto;
@@ -113,16 +113,21 @@ body {
 #login-btn,
 #signup-btn {
     border-radius: 30px;
+    border-width: 0px;
+    /* box-shadow: 3px 3px 3px black; */
     background: transparent;
     padding: 10px 30px;
-    border: 0;
     cursor: pointer;
+    margin: -7px;
     position: relative;
     outline: none;
     transition: background-color 0.3s, color 0.3s;
 
 }
-
+#login-btn{
+    background-color: #d098fb;
+    color: white;
+}
 #submit-btn {
     margin: 90px 20px;
     border-radius: 20px;
@@ -135,8 +140,8 @@ body {
 #login-btn:hover,
 #signup-btn:hover,
 #submit-btn:hover {
-    background-color: rgb(0, 0, 0);
-    color: white;
+    background-color: #d098fb !important;
+    color: white !important;
 }
 
 #login {
@@ -144,7 +149,9 @@ body {
 }
 
 #signup {
-    left: 450px;
+    margin-top: -350px;
+    margin-left: 450px;
+    visibility: hidden;
 }
 
 .footer {

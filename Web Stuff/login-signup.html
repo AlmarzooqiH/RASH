@@ -6,10 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/login-signup.css">
     <title>Login/Signup</title>
+    <script src="js/login-signup.js"></script>
 </head>
 
 <body>
     <div class="banner">
+        <script src="js/login-signup.js"></script>
         <div class="navbar">
             <img src="css/images/RASH-removebg-preview.png" alt="Rash Hotels" class="logo">
             <ul>
@@ -19,19 +21,19 @@
                 <li><a href="#">Log In</a></li>
             </ul>
         </div>
-        <div class="login-signup-form">
+        <div id="login-signup-form">
             <div id="buttons">
                 <center>
-                    <button id="login-btn">Login</button>
-                    <button id="signup-btn">Signup</button>
+                    <button id="login-btn" onclick="login()">Login</button>
+                    <button id="signup-btn" onclick="signup()">Signup</button>
                 </center>
             </div>
-                <form action="" method="POST" class="textfeilds">
+                <form id="login" method="POST" class="textfeilds">
                     <input id="username" type="text" placeholder="username" name="username"><br>
                     <input id="password" type="password" placeholder="password" name="password">
                     <center><input type="submit" value="Login" id="submit-btn"></center>
                 </form>
-            <form id="signup" action="" method="POST" class="textfeilds">
+            <form id="signup" method="POST" class="textfeilds">
                 <input id="first-name" type="text" placeholder="firstname" name="firstname"><br>
                 <input id="last-name" type="text" placeholder="lastname" name="lastname">
                 <input id="username" type="text" placeholder="username" name="username">

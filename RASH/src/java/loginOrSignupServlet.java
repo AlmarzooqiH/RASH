@@ -55,7 +55,7 @@ public class loginOrSignupServlet extends HttpServlet {
                 ResultSet result = statement.executeQuery("SELECT * FROM `Account` WHERE"
                         + " Username=" + "'" + user + "'" + "AND Password=" + "'" + pass + "'");
                 result.next();
-                response.getWriter().println("<center><h1>Welcome " + result.getString("Username") +"</h1></center>");
+                response.getWriter().println("<center><h1>Welcome " + result.getString("Username") + "</h1></center>");
                 response.getWriter().close();
             } catch (Exception err) {
                 response.getWriter().println(err);
@@ -63,7 +63,27 @@ public class loginOrSignupServlet extends HttpServlet {
                 System.out.println(err);
             }
         } else if (signup != null) {
+            String user = request.getParameter("username");
+            String pass = request.getParameter("password");
+            String fname = request.getParameter("firstname");
+            String lname = request.getParameter("lastname");
+            String email = request.getParameter("email");
+            String pnumber = request.getParameter("phone-number");
+            try {
+                int insertAccount = statement.executeUpdate("INSERT INTO `Account`(`Username`, `Password`) VALUES ('" + user + "','" + pass + "')");
+                ResultSet insertCustomer = statement.executeQuery("INSERT INTO `Customer`(`Fname`, `Lname`, `Phone#`, `AID`, `Email`) VALUES ("
+                        + "'" + fname + "',"
+                        + "'" + lname + "',"
+                        + "'" + pnumber + "',"
+                        + "'" + Integer.parseInt(statement.executeQuery("SELECT ID FROM Account WHERE Username='" + user +"'").getNString("ID")) + "',"
+                        + "'" + email + "')"
+                );
 
+            } catch (Exception err) {
+                response.getWriter().println(err);
+                response.getWriter().close();
+                System.out.println(err);
+            }
         }
     }
 
@@ -106,4 +126,13 @@ public class loginOrSignupServlet extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
+    private boolean checkUsername(String username, Statement statement) {
+        try {
+            ResultSet result = statement.executeQuery("SELECT * FROM Account WHERE Username='" + username + "'");
+            return result.next();
+        } catch (Exception err) {
+            System.out.println(err);
+        }
+        return false;
+    }
 }

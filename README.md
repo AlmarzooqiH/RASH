@@ -1,4 +1,2 @@
-# RASH
-# RASH
-# RASH
-#TEST
+# Web dev -> Website (No Java)
+# RASH -> Netbeans Project (With Java)

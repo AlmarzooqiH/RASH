@@ -1,31 +1,73 @@
-* {
-    margin: 0;
+*,
+*:before,
+*:after {
     padding: 0;
-    font-family: sans-serif;
+    margin: 0;
     box-sizing: border-box;
 }
 
-html,
 body {
-    margin: 0;
-    padding: 0;
+    background-color: #080710;
 }
 
+.background {
+    width: 430px;
+    height: 520px;
+    position: absolute;
+    transform: translate(-50%, -50%);
+    left: 50%;
+    top: 50%;
+}
+
+form * {
+    font-family: 'Poppins', sans-serif;
+    color: #ffffff;
+    letter-spacing: 0.5px;
+    outline: none;
+    border: none;
+}
+
+form h3 {
+    font-size: 32px;
+    font-weight: 500;
+    line-height: 42px;
+    text-align: center;
+}
+
+label {
+    display: block;
+    margin-top: 30px;
+    font-size: 16px;
+    font-weight: 500;
+}
+input{
+    display: block;
+    height: 50px;
+    width: 100%;
+    background-color: rgba(255,255,255,0.07);
+    border-radius: 3px;
+    padding: 0 10px;
+    margin-top: 8px;
+    font-size: 14px;
+    font-weight: 300;
+}
 #login-signup-form {
-    height: 400px;
-    width: 375px;
+    height: 520px;
+    width: 400px;
     margin: 0 auto;
     position: absolute;
     top: 50%;
     left: 50%;
+    background-color: rgba(255, 255, 255, 0.13);
     transform: translate(-50%, -50%);
-    border-width: 3px;
-    background-color: rgba(247, 251, 255, 0.85);
-    border-style: solid;
-    border-radius: 20px;
-    box-shadow: 1px 10px 7px black;
+    border-radius: 10px;
+    backdrop-filter: blur(10px);
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 0 40px rgba(8, 7, 16, 0.6);
 }
-
+::placeholder{
+    color: #e5e5e5;
+}
 .logo {
     background-color: rgba(255, 255, 255, 0);
     width: 20px;
@@ -109,6 +151,15 @@ body {
     width: 100%;
     display: block;
 }
+.container {
+    display: inline-flex;
+    margin: 20px auto;
+    padding: 20px auto;
+}
+
+.textbox {
+    margin-right: 10px; /* Adds spacing between text boxes */
+}
 
 #login-btn,
 #signup-btn {
@@ -123,12 +174,14 @@ body {
     transition: background-color 0.3s, color 0.3s;
 
 }
-#login-btn{
-    background-color: #d098fb;
+
+#login-btn {
+    background-color: #546ad5;
     color: white;
 }
+
 #submit-btn {
-    margin: 90px 20px;
+    margin: 90px 90px 90px 0px;
     border-radius: 20px;
     padding: 10px 30px;
     cursor: pointer;
@@ -139,7 +192,7 @@ body {
 #login-btn:hover,
 #signup-btn:hover,
 #submit-btn:hover {
-    background-color: #d098fb !important;
+    background-color: #546ad5 !important;
     color: white !important;
 }
 
@@ -148,8 +201,8 @@ body {
 }
 
 #signup {
-    margin-top: -350px;
-    margin-left: 450px;
+    margin-top: -450px;
+    margin-left: 60px;
     visibility: hidden;
 }
 

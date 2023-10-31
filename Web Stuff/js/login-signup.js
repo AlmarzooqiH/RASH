@@ -8,9 +8,10 @@ function login() {
     formBorder.style.width = "600px";
     formBorder.style.transition = "height 0.6s, width 0.6s";
     loginForm.style.visibility = "visible";
-    signupForm.style.visibility = "hidden";
     loginBtn.style.backgroundColor = "#546ad5";
     loginBtn.style.color = "white";
+    signupForm.style.visibility = "hidden";
+    signupForm.style.marginTop = "-1000px";
     signupBtn.style.background = "transparent";
     signupBtn.style.cursor = "pointer";
 }
@@ -28,6 +29,7 @@ function signup() {
     signupForm.style.visibility = "visible";
     signupForm.style.marginLeft = "center";
     signupForm.style.marginTop = "center";
+    signupForm.style.marginTop = "-430px";
     signupBtn.style.backgroundColor = "#546ad5";
     signupBtn.style.color = "white";
     loginBtn.style.cursor = "pointer";

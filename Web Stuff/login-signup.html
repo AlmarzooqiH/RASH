@@ -36,24 +36,30 @@
                 <input type="hidden" name="login">
                 <center><input type="submit" value="Login" id="submit-btn"></center>
             </form>
-            <form id="signup" action="loginOrSignupServlet" method="GET" class="textfeilds">
+            <form id="signup" action="loginOrSignupServlet" method="POST" class="textfeilds">
                 <div class="container">
-                    <label>First Name</label>
-                    <input id="first-name" type="text" placeholder="firstname" name="firstname"><br>
-                    <label>Last Name</label>
-                    <input id="last-name" type="text" placeholder="lastname" name="lastname">
+                    <div class="textbox">
+                        <label>First Name</label>
+                        <input id="first-name" type="text" placeholder="firstname" name="firstname"><br>
+                        <label>Last Name</label>
+                        <input id="last-name" type="text" placeholder="lastname" name="lastname">
+                    </div>
                 </div>
                 <div class="container">
-                    <label>Username</label>
-                    <input id="username" type="text" placeholder="username" name="username">
-                    <label>Password</label>
-                    <input id="password" type="password" placeholder="password" name="password">
+                    <div class="textbox">
+                        <label>Username</label>
+                        <input id="username" type="text" placeholder="username" name="username">
+                        <label>Password</label>
+                        <input id="password" type="password" placeholder="password" name="password">
+                    </div>
                 </div>
                 <div class="container">
-                    <label>Email</label>
-                    <input id="email" type="email" placeholder="Email" name="email">
-                    <label>Phone Number</label>
-                    <input id="phone-number" type="text" placeholder="Phone Number" name="phone-number">
+                    <div class="textbox">
+                        <label>Email</label>
+                        <input id="email" type="email" placeholder="Email" name="email">
+                        <label>Phone Number</label>
+                        <input id="phone-number" type="text" placeholder="Phone Number" name="phone-number">
+                    </div>
                 </div>
                 <input type="hidden" name="signup">
                 <center><input type="submit" value="Signup" id="submit-btn"></center>

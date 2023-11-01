@@ -157,12 +157,28 @@ input {
     display: inline-flex;
 }
 
+#email,
+#phone-number {
+    width: 200%;
+    text-align: center;
+
+}
+
 .container {
     display: inline-block;
+    transform: translate(-6%, 50%);
     justify-content: space-between;
 }
+
+#email-phone-container {
+    width: 60%;
+    text-align: center;
+}
+
 .textbox {
+    margin-top: -30px;
     margin-right: 40px;
+    margin-left: -25px;
     padding: 10px;
 }
 
@@ -185,14 +201,22 @@ input {
     color: white;
 }
 
-#submit-btn {
+#submit-btn-in-login {
     margin: 90px 90px 90px 0px;
     border-radius: 20px;
     padding: 10px 30px;
     cursor: pointer;
     box-shadow: 3px 3px 3px black;
     transition: background-color 0.3s, color 0.3s;
-    text-align: center;
+}
+
+#submit-btn-in-signup {
+    margin: 90px 90px 90px 40px;
+    border-radius: 20px;
+    padding: 10px 30px;
+    cursor: pointer;
+    box-shadow: 3px 3px 3px black;
+    transition: background-color 0.3s, color 0.3s;
 }
 
 #login-btn:hover,

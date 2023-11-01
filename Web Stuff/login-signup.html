@@ -34,7 +34,7 @@
                 <label>Password</label>
                 <input id="password" type="password" placeholder="password" name="password">
                 <input type="hidden" name="login">
-                <center><input type="submit" value="Login" id="submit-btn"></center>
+                <center><input type="submit" value="Login" id="submit-btn-in-login"></center>
             </form>
             <form id="signup" action="loginOrSignupServlet" method="POST" class="textfeilds">
                 <div class="container">
@@ -63,22 +63,23 @@
                     </div>
                 </div>
                 <br>
-                <div class="container">
-                    <div class="textbox">
-                        <label>Email</label>
-                        <input id="email" type="email" placeholder="Email" name="email">
+                <div id="email-phone-container">
+                    <div class="container">
+                        <div class="textbox">
+                            <label>Email</label>
+                            <input id="email" type="email" placeholder="Email" name="email">
+                        </div>
                     </div>
-                </div>
-                <br>
-                <div class="container">
-                    <div class="textbox">
-                        <label>Phone Number</label>
-                        <input id="phone-number" type="text" placeholder="Phone Number" name="phone-number">
-                        <input type="hidden" name="signup">
+                    <br>
+                    <div class="container">
+                        <div class="textbox">
+                            <label>Phone Number</label>
+                            <input id="phone-number" type="text" placeholder="Phone Number" name="phone-number">
+                            <input type="hidden" name="signup">
+                        </div>
                     </div>
+                    <input type="submit" value="Signup" id="submit-btn-in-signup">
                 </div>
-                
-                <center><input type="submit" value="Signup" id="submit-btn"></center>
             </form>
         </div>
         <div class="footer">

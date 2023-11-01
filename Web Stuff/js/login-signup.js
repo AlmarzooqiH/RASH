@@ -22,14 +22,14 @@ function signup() {
     const signupForm = document.getElementById("signup");
     const loginBtn = document.getElementById("login-btn");
     const signupBtn = document.getElementById("signup-btn");
-    formBorder.style.height = "600px";
-    formBorder.style.width = "750px";
+    formBorder.style.height = "620px";
+    formBorder.style.width = "650px";
     formBorder.style.transition = "height 0.6s, width 0.6s";
     loginForm.style.visibility = "hidden";
     signupForm.style.visibility = "visible";
     signupForm.style.marginLeft = "center";
     signupForm.style.marginTop = "center";
-    signupForm.style.marginTop = "-430px";
+    signupForm.style.marginTop = "-525px";
     signupBtn.style.backgroundColor = "#546ad5";
     signupBtn.style.color = "white";
     loginBtn.style.cursor = "pointer";

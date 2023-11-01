@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:8889
--- Generation Time: Oct 20, 2023 at 07:44 PM
+-- Generation Time: Nov 01, 2023 at 01:56 PM
 -- Server version: 5.7.39
 -- PHP Version: 7.4.33
 
@@ -42,7 +42,21 @@ INSERT INTO `Account` (`ID`, `Username`, `Password`, `Type`) VALUES
 (1, 'Hamad', 'aaabbbccc', 'OWNER'),
 (2, 'Rashid', 'dddeeefff', 'OWNER'),
 (3, 'Mohammad', 'ggghhhiii', 'OWNER'),
-(4, 'John Doe', '1234', 'Customer');
+(4, 'John Doe', '1234', 'Customer'),
+(5, 'rewedfgtre', '5678', 'Customer'),
+(6, 'peepeepoopoo', 'haha', 'Customer'),
+(7, 'hehehehe', 'lmm n', 'Customer'),
+(8, 'hehehehe', 'lmm n', 'Customer'),
+(9, 'qwerg', 'qwerg', 'Customer'),
+(10, 'qwerg', 'qwerg', 'Customer'),
+(11, 'qwerg', 'qwerg', 'Customer'),
+(12, 'qwerg', 'qwerg', 'Customer'),
+(13, 'qwefg', 'sdf', 'Customer'),
+(14, 'abcdefg', 'asdfghjkl', 'Customer'),
+(15, 'abcdefg', 'asdfghjkl', 'Customer'),
+(16, 'abcdefg', 'asdfghjkl', 'Customer'),
+(17, 'Thank you', '123456', 'Customer'),
+(18, 'M', 'N', 'Customer');
 
 -- --------------------------------------------------------
 
@@ -84,7 +98,10 @@ CREATE TABLE `Customer` (
 --
 
 INSERT INTO `Customer` (`Fname`, `Lname`, `CID`, `Phone#`, `AID`, `Email`) VALUES
-('Jhon', 'Doe', 1, '0501234567', 4, 'JhoneDoe@gmail.com');
+('Jhon', 'Doe', 1, '0501234567', 4, 'JhoneDoe@gmail.com'),
+('mmmm', 'mnbbm', 2, '1234567890', 14, 'L@L.COM'),
+('Yes', 'No', 3, '1234567890', 17, 'L@L.COM'),
+('k', 'L', 4, '1234567890', 18, 'L@L.COM');
 
 -- --------------------------------------------------------
 
@@ -139,15 +156,16 @@ CREATE TABLE `Room` (
   `HID` int(6) NOT NULL,
   `BID` int(12) NOT NULL,
   `Room#` int(4) NOT NULL,
-  `Price` int(6) NOT NULL
+  `Price` int(6) NOT NULL,
+  `Availability` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `Room`
 --
 
-INSERT INTO `Room` (`RID`, `Type`, `HID`, `BID`, `Room#`, `Price`) VALUES
-(1, 'Apartment', 1, 1, 1, 200);
+INSERT INTO `Room` (`RID`, `Type`, `HID`, `BID`, `Room#`, `Price`, `Availability`) VALUES
+(1, 'Apartment', 1, 1, 1, 200, 0);
 
 --
 -- Indexes for dumped tables
@@ -202,7 +220,7 @@ ALTER TABLE `Room`
 -- AUTO_INCREMENT for table `Account`
 --
 ALTER TABLE `Account`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `Booking`
@@ -214,7 +232,7 @@ ALTER TABLE `Booking`
 -- AUTO_INCREMENT for table `Customer`
 --
 ALTER TABLE `Customer`
-  MODIFY `CID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `CID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `Employee`

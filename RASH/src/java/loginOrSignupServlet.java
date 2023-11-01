@@ -41,7 +41,11 @@ public class loginOrSignupServlet extends HttpServlet {
                 response.getWriter().println("<center><h1>Welcome " + result.getString("Username") + "</h1></center>");
                 response.getWriter().close();
             } catch (Exception err) {
+<<<<<<< HEAD
                 response.getWriter().println("<center><h1>Invalid username or password</h1></center>");
+=======
+                response.getWriter().println(err);
+>>>>>>> db88fef557e9f670d853121edb801760381e6e15
                 response.getWriter().close();
                 System.out.println(err);
             }

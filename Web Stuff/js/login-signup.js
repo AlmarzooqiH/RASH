@@ -22,8 +22,8 @@ function signup() {
     const signupForm = document.getElementById("signup");
     const loginBtn = document.getElementById("login-btn");
     const signupBtn = document.getElementById("signup-btn");
-    formBorder.style.height = "570px";
-    formBorder.style.width = "1000px";
+    formBorder.style.height = "600px";
+    formBorder.style.width = "750px";
     formBorder.style.transition = "height 0.6s, width 0.6s";
     loginForm.style.visibility = "hidden";
     signupForm.style.visibility = "visible";

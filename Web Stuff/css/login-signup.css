@@ -40,17 +40,19 @@ label {
     font-size: 16px;
     font-weight: 500;
 }
-input{
+
+input {
     display: block;
     height: 50px;
     width: 100%;
-    background-color: rgba(255,255,255,0.07);
+    background-color: rgba(255, 255, 255, 0.07);
     border-radius: 3px;
     padding: 0 10px;
     margin-top: 8px;
     font-size: 14px;
     font-weight: 300;
 }
+
 #login-signup-form {
     height: 520px;
     width: 600px;
@@ -66,9 +68,11 @@ input{
     box-shadow: 0 0 40px rgba(8, 7, 16, 0.6);
 
 }
-::placeholder{
+
+::placeholder {
     color: #e5e5e5;
 }
+
 .logo {
     background-color: rgba(255, 255, 255, 0);
     width: 20px;
@@ -152,11 +156,11 @@ input{
     width: 100%;
     display: inline-flex;
 }
+
 .container {
-    display: inline-flex;
+    display: inline-block;
     justify-content: space-between;
 }
-
 .textbox {
     margin-right: 40px;
     padding: 10px;

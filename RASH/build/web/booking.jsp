@@ -35,45 +35,51 @@
                 System.out.println(err);
             }
         %>
-        <div id="center-div">
-            <div id="filter-rooms-form">
-                <form action="filter" method="POST" id="filter">
-                    <div id="center-elements">
-                        <h2>Choose the location</h2>
-                        <select name="selection">
-                            <option name="AUH">Abu Dhabi</option>    
-                            <option name="DXB">Dubai</option>
-                            <option name="RKT">Ras al Khaimah</option>
-                            <option name="JFK">New York</option>
-                            <option name="HND">Tokyo</option>
-                            <option name="CDG">Paris</option>
-                            <option name="SYD">Sydney</option>
-                            <option name="EGLL">London</option>
-                            <option name="BCN">Barcelona</option>
-                            <option name="SXF">Berlin</option>
-                        </select>
-                        <h2>Arrival</h2>
-                        <div id="date">
-                            <label>Arrival Date</label>
-                            <input type="date" name="arrival">
-                            <br>
-                            <label>Departure Date</label> <input type="date" name="departure">
-                        </div>
-                        <input type="submit" value="Find a room">
-                        </form>
-                    </div>
-            </div>
-            <div id="filtered-rooms">
-                <div class="rooms">
-                    <img src="css/Images/Hotel-Room.jpg" alt="Dummy Image">
-                    <label class="price">Price</label>
-                    <input type="submit" value="Book" class="book-btn">
-                </div>
-                <%
-                rs = statement.executeQuery("SELECT Type, Room.HID, Room.`Room#`, Price, Location FROM Room, Hotel WHERE Room.HID = 1 AND Hotel.HID = 1");
-                response.getWriter().println(rs.next());
-                %>
-            </div>
-        </div>
-    </body>
-</html>
+        <%
+            response.getWriter().println("<div id=\"center-div\">");
+            response.getWriter().println("<div id=\"filter-rooms-form\">");
+            response.getWriter().println("<form action=\"\" method=\"POST\" id=\"filter\">");
+            response.getWriter().println("<div id=\"center-elements\">");
+            response.getWriter().println("<h2>Choose the location</h2>");
+            response.getWriter().println("<select name=\"selection\">");
+            response.getWriter().println("<option name=\"AUH\">Abu Dhabi</option>");
+            response.getWriter().println("<option name=\"DXB\">Dubai</option>");
+            response.getWriter().println("<option name=\"RKT\">Ras al Khaimah</option>");
+            response.getWriter().println("<option name=\"JFK\">New York</option>");
+            response.getWriter().println("<option name=\"HND\">Tokyo</option>");
+            response.getWriter().println("<option name=\"CDG\">Paris</option>");
+            response.getWriter().println("<option name=\"SYD\">Sydney</option>");
+            response.getWriter().println("<option name=\"EGLL\">London</option>");
+            response.getWriter().println("<option name=\"BCN\">Barcelona</option>");
+            response.getWriter().println("<option name=\"SXF\">Berlin</option>");
+            response.getWriter().println("</select>");
+            response.getWriter().println("<h2>Arrival</h2>");
+            response.getWriter().println("<div id=\"date\">");
+            response.getWriter().println("<label>Arrival Date</label>");
+            response.getWriter().println("<input type=\"date\" name=\"arrival\">");
+            response.getWriter().println("<br>");
+            response.getWriter().println("<label>Departure Date</label> <input type=\"date\" name=\"departure\">");
+            response.getWriter().println("</div>");
+            response.getWriter().println("<input type=\"submit\" value=\"Find a room\">");
+            response.getWriter().println("</form>");
+            response.getWriter().println("</div>");
+            response.getWriter().println("</div>");
+            response.getWriter().println("<div id=\"filtered-rooms\">");
+            response.getWriter().println("<div class=\"rooms\">");
+            response.getWriter().println("<img src=\"css/Images/Hotel-Room.jpg\" alt=\"Dummy Image\">");
+            response.getWriter().println("<label class=\"price\">Price</label>");
+            response.getWriter().println("<input type=\"submit\" value=\"Book\" class=\"book-btn\">");
+            response.getWriter().println("</div>");
+
+            rs = statement.executeQuery("SELECT Type, Room.`Room#`, Price, Location FROM Room, Hotel WHERE Room.HID = 1 AND Hotel.HID = 1");
+            
+            while (rs.next()) {
+                response.getWriter().println("<div class=\"rooms\"> <img src=\"css/Images/Hotel-Room.jpg\" alt=\"Dummy Image\"> <label class=\"price\">" + rs.getString("Price") + "</label><input type=\"submit\" value=\"Book\" class=\"book-btn\"></div>");
+            }
+
+            response.getWriter().println("</div>");
+            response.getWriter().println("</div>");
+            response.getWriter().println("</body>");
+            response.getWriter().println("</html>");
+
+        %>

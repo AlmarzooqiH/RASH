@@ -15,6 +15,26 @@
     </head>
     <body>
         <jsp:include page="LogoAndNavbar.jsp"></jsp:include>
+        <%!
+            String db_URL = "jdbc:mysql://localhost:8889/RASH_HOTEL?autoReconnect=true&useSSL=false";
+            String driver_name = "com.mysql.jdbc.Driver";
+            String username = "root";
+            String password = "root";
+            Connection connection = null;
+            Statement statement = null;
+            ResultSet rs = null;
+        %>
+        <%
+            try {
+                Class.forName(driver_name).newInstance();
+                connection = DriverManager.getConnection(db_URL, username, password);
+                statement = connection.createStatement();
+            } catch (Exception err) {
+                response.getWriter().println(err);
+                response.getWriter().close();
+                System.out.println(err);
+            }
+        %>
         <div id="center-div">
             <div id="filter-rooms-form">
                 <form action="filter" method="POST" id="filter">
@@ -49,6 +69,10 @@
                     <label class="price">Price</label>
                     <input type="submit" value="Book" class="book-btn">
                 </div>
+                <%
+                rs = statement.executeQuery("SELECT Type, Room.HID, Room.`Room#`, Price, Location FROM Room, Hotel WHERE Room.HID = 1 AND Hotel.HID = 1");
+                response.getWriter().println(rs.next());
+                %>
             </div>
         </div>
     </body>

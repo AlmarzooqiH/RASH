@@ -28,7 +28,7 @@ public class loginOrSignupServlet extends HttpServlet {
             response.getWriter().close();
             System.out.println(err);
         }
-        response.setContentType("text/html;charset=UTF-8");
+        response.setContentType("text/html;charset=UTF-8"); 
         String login = request.getParameter("login");
         String signup = request.getParameter("signup");
         if (login != null) {

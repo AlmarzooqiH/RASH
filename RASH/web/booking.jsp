@@ -42,16 +42,16 @@
             response.getWriter().println("<div id=\"center-elements\">");
             response.getWriter().println("<h2>Choose the location</h2>");
             response.getWriter().println("<select name=\"selection\">");
-            response.getWriter().println("<option name=\"AUH\">Abu Dhabi</option>");
-            response.getWriter().println("<option name=\"DXB\">Dubai</option>");
-            response.getWriter().println("<option name=\"RKT\">Ras al Khaimah</option>");
-            response.getWriter().println("<option name=\"JFK\">New York</option>");
-            response.getWriter().println("<option name=\"HND\">Tokyo</option>");
-            response.getWriter().println("<option name=\"CDG\">Paris</option>");
-            response.getWriter().println("<option name=\"SYD\">Sydney</option>");
-            response.getWriter().println("<option name=\"EGLL\">London</option>");
-            response.getWriter().println("<option name=\"BCN\">Barcelona</option>");
-            response.getWriter().println("<option name=\"SXF\">Berlin</option>");
+            response.getWriter().println("<option value=\"1\">Abu Dhabi</option>");
+            response.getWriter().println("<option value=\"2\">Dubai</option>");
+            response.getWriter().println("<option value=\"3\">Ras al Khaimah</option>");
+            response.getWriter().println("<option value=\"4\">New York</option>");
+            response.getWriter().println("<option value=\"5\">Tokyo</option>");
+            response.getWriter().println("<option value=\"6\">Paris</option>");
+            response.getWriter().println("<option value=\"7\">Sydney</option>");
+            response.getWriter().println("<option value=\"8\">London</option>");
+            response.getWriter().println("<option value=\"9\">Barcelona</option>");
+            response.getWriter().println("<option value=\"10\">Berlin</option>");
             response.getWriter().println("</select>");
             response.getWriter().println("<h2>Arrival</h2>");
             response.getWriter().println("<div id=\"date\">");
@@ -65,21 +65,19 @@
             response.getWriter().println("</div>");
             response.getWriter().println("</div>");
             response.getWriter().println("<div id=\"filtered-rooms\">");
-            response.getWriter().println("<div class=\"rooms\">");
-            response.getWriter().println("<img src=\"css/Images/Hotel-Room.jpg\" alt=\"Dummy Image\">");
-            response.getWriter().println("<label class=\"price\">Price</label>");
-            response.getWriter().println("<input type=\"submit\" value=\"Book\" class=\"book-btn\">");
-            response.getWriter().println("</div>");
+            int hotel_location = Integer.parseInt(request.getParameter("selection"));
+            rs = statement.executeQuery("SELECT Type, Room.`Room#`, Price, Location FROM Room, Hotel WHERE Room.HID = " + hotel_location +" AND Hotel.HID =" + hotel_location);
 
-            rs = statement.executeQuery("SELECT Type, Room.`Room#`, Price, Location FROM Room, Hotel WHERE Room.HID = 1 AND Hotel.HID = 1");
-            
             while (rs.next()) {
-                response.getWriter().println("<div class=\"rooms\"> <img src=\"css/Images/Hotel-Room.jpg\" alt=\"Dummy Image\"> <label class=\"price\">" + rs.getString("Price") + "</label><input type=\"submit\" value=\"Book\" class=\"book-btn\"></div>");
+                response.getWriter().println("<div class=\"rooms\"><img src=\"css/Images/Hotel-Room.jpg\" alt=\"Dummy Image\"> <div class=\"room-type\"><label>Room type: </label> <strong>" + rs.getString("Type") + "</strong></div><div class=\"room-number\"><label>Room Number </label> <strong>" + rs.getString("Room#") + " </strong></div><div class=\"location\"><label>Location: </label><strong>" + rs.getString("Location") + "</strong></div><label class=\"price\">" + rs.getString("Price") + "</label><input type=\"submit\" value=\"Book\" class=\"book-btn\"></div>");
             }
 
             response.getWriter().println("</div>");
             response.getWriter().println("</div>");
-            response.getWriter().println("</body>");
-            response.getWriter().println("</html>");
-
+            connection.close();
+            statement.close();
+            rs.close();
         %>
+    </body>
+</html>
+

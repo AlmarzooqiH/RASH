@@ -1,0 +1,318 @@
+body {
+  background-attachment: fixed;
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  scroll-behavior: smooth;
+}
+
+.container {
+  max-width: 80%;
+  margin: auto;
+}
+
+#logo {
+  width: 10%;
+}
+
+header {
+  display: flex;
+  align-items: flex-start;
+  color: rgb(255, 255, 255);
+  text-align: right;
+  height: 100%;
+  width: 100%;
+}
+
+#hdiv {
+  text-align: right;
+  flex: 1;
+  margin-right: 2%;
+  margin-top: 0%;
+}
+
+#username {
+  font-size: 150%;
+}
+
+h3 {
+  margin: 0%;
+  font-size: 250%;
+}
+
+#wdiv {
+  padding-top: 20%;
+}
+
+#wtext {
+  font-size: 150%;
+  color: white;
+  font-style: italic;
+}
+
+#d1 {
+  margin: 0% 0% 0% 0%;
+  color: black;
+  text-align: center;
+  background-image: linear-gradient(rgba(0, 0, 0, 50%), rgba(0, 0, 0, 50%)), url(Images/hallway.jpg);
+  background-size: 100%;
+  background-repeat: no-repeat;
+  padding-bottom: 200px;
+}
+
+.top {
+  padding-top: 10%;
+}
+
+.mtop {
+  margin-top: 5%;
+}
+
+.left,
+.right {
+  width: 50%;
+}
+
+.about {
+  margin-bottom: 50px;
+}
+
+.about .img {
+  position: relative;
+}
+
+.about .image1 {
+  width: 310px;
+  height: 450px;
+}
+
+.about .image2 {
+  width: 325px;
+  height: 220px;
+  position: absolute;
+  bottom: 5px;
+  z-index: 2;
+  right: 30%;
+}
+
+.heading {
+  position: relative;
+}
+
+.heading::after {
+  position: absolute;
+  top: 0;
+  left: 0;
+  content: '';
+  width: 100px;
+  height: 4px;
+  background: #FFCB00;
+}
+
+.heading h5 {
+  font-weight: 400;
+  letter-spacing: 2px;
+  padding-top: 20px;
+  color: #5f5f5f;
+}
+
+.heading h2 {
+  font-size: 30px;
+  font-weight: 400;
+  margin: 20px 0 40px 0;
+  color: #222222;
+}
+
+.heading p {
+  margin-bottom: 20px;
+  line-height: 25px;
+  color: #5f5f5f;
+  margin: 0 0 20px 50px;
+}
+
+.heading .btn1,
+.btn1 {
+  font-weight: bold;
+  font-size: 17px;
+  color: white;
+  height: 50px;
+  width: 120px;
+  border: transparent;
+  border-style: solid;
+  background-color: black;
+  transition-duration: 0.4s;
+  cursor: pointer;
+  display: inline-block;
+  text-align: center;
+  line-height: 50px;
+  text-decoration: none;
+}
+
+.btn1:hover {
+  background-color: #FFCB00;
+}
+
+#about {
+  box-shadow: 0 0px 10px rgba(0, 0, 0, 0.5);
+}
+
+.flex {
+  display: flex;
+}
+
+#whycontainer {
+  padding-top: 0%;
+  padding-bottom: 0%;
+  text-align: center;
+}
+
+#whyus {
+  font-size: 200%;
+  margin-bottom: 8%;
+}
+
+#d2 {
+  display: flex;
+  background-color: rgba(0, 0, 0, 0%);
+  padding: 4% 2% 9% 2%;
+}
+
+.point {
+  text-align: center;
+  margin: 0% 2% 0% 2%;
+}
+
+.icon {
+  width: 25%;
+  transition-duration: 0.2s;
+}
+
+.icon:hover {
+  filter: saturate(100);
+}
+
+#sec {
+  padding: 4% 10% 4% 10%;
+  text-align: center;
+  background-color: black;
+  color: white;
+}
+
+.wrapper {
+  background-image: url("../image/ami.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 100%;
+  height: 480px;
+  position: relative;
+  padding-top: 0%;
+  padding-bottom: 15%;
+}
+
+.wrapper .text {
+  background: black;
+  padding: 30px;
+  width: 30%;
+  height: 70%;
+  position: absolute;
+  color: white;
+}
+
+.wrapper .content {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-row-gap: 30px;
+}
+
+.wrapper h2 {
+  font-weight: 400;
+}
+
+.wrapper p {
+  margin: 20px 0 50px 0;
+  line-height: 30px;
+}
+
+.wrapper i {
+  margin: 5px 20px 0 0;
+}
+
+.restaurant .container {
+  flex-direction: column;
+}
+
+.home .text {
+  max-width: 50%;
+  color: white;
+  margin: 20% 0 0 10%;
+}
+
+#pool {
+  background-image: url("Images/pool2.jpg");
+}
+
+#spa {
+  background-image: url("Images/spa2.jpg");
+}
+
+#righttext {
+  right: 10%;
+}
+
+#lefttext {
+  left: 10%;
+}
+
+.wrapper2 h5,
+.wrapper2 h2 {
+  color: white;
+}
+
+.wrapper2 img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  margin-right: 20px;
+}
+
+.wrapper2 .para h5 {
+  font-size: 13px;
+  font-weight: 300;
+  margin-top: 5px;
+}
+
+.wrapper2 .para {
+  margin-left: 10%;
+}
+
+
+
+#lastdiv {
+  text-align: center;
+  padding-top: 7%;
+  padding-bottom: 5%;
+  background-color: white;
+}
+
+#lastbtn {
+  height: 50px;
+  width: 140px;
+  border: transparent;
+  background-color: black;
+  color: white;
+  transition-duration: 0.4s;
+  cursor: pointer;
+}
+
+#lastbtn:hover {
+  background-color: #FFCB00;
+}
+
+#lastbtnfont {
+  font-size: 115%;
+  font-weight: bold;
+}
+
+footer {
+  background-color: black;
+  padding: 3% 0 3% 0;
+}

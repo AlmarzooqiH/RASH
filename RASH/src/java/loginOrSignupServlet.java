@@ -35,11 +35,15 @@ public class loginOrSignupServlet extends HttpServlet {
             String user = request.getParameter("username");
             String pass = request.getParameter("password");
             try {
-                ResultSet result = statement.executeQuery("SELECT * FROM `Account` WHERE"
-                        + " Username=" + "'" + user + "'" + "AND Password=" + "'" + pass + "'");
-                result.next();
-                response.getWriter().println("<center><h1>Welcome " + result.getString("Username") + "</h1></center>");
-                response.getWriter().close();
+                ResultSet result = statement.executeQuery("SELECT * FROM `Account` WHERE Username='" + user + "' AND Password=SHA2('" + pass + "', 256)");
+                if (result.next()) {
+                    request.getSession().setAttribute("user", user);
+                    response.sendRedirect(request.getContextPath() + "/landing.jsp");
+                } else {
+                    response.getWriter().println("<center><h1>username or password are invalid!</h1></center>");
+                    response.getWriter().close();
+                }
+
             } catch (Exception err) {
                 response.getWriter().println("<center><h1>username or password are invalid!</h1></center>");
                 response.getWriter().close();
@@ -58,7 +62,7 @@ public class loginOrSignupServlet extends HttpServlet {
             String email = request.getParameter("email");
             String pnumber = request.getParameter("phone-number");
             try {
-                statement.executeUpdate("INSERT INTO `Account`(`Username`, `Password`) VALUES ('" + user + "','" + pass + "')");
+                statement.executeUpdate("INSERT INTO `Account` (`Username`, `Password`) VALUES ('" + user + "', SHA2('" + pass + "', 256))");
                 ResultSet insertAccount = statement.executeQuery("SELECT ID FROM Account WHERE Username='" + user + "'");
                 insertAccount.next();
                 int aid = insertAccount.getInt("ID");

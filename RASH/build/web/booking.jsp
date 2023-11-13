@@ -4,8 +4,19 @@
     Author     : truedeveloper
 --%>
 
+<%--<%
+            String db_URL = (String) session.getAttribute("db_URL");
+            String driver_name = (String) session.getAttribute("driver_name");
+            String username = (String) session.getAttribute("username");
+            String password = (String) session.getAttribute("password");
+            Connection connection = (Connection) session.getAttribute("connection");
+            Statement statement = (Statement) session.getAttribute("statement");
+            ResultSet rs = null;
+%>--%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import ="java.sql.*"%>
+<%@page import ="javax.servlet.http.*"%>
+<%@page session ="true"%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -15,26 +26,12 @@
     </head>
     <body>
         <jsp:include page="LogoAndNavbar.jsp"></jsp:include>
-        <%!
-            String db_URL = "jdbc:mysql://localhost:8889/RASH_HOTEL?autoReconnect=true&useSSL=false";
-            String driver_name = "com.mysql.jdbc.Driver";
-            String username = "root";
-            String password = "root";
-            Connection connection = null;
-            Statement statement = null;
+        <%
+            Connection connection = (Connection) session.getAttribute("connection");
+            Statement statement = (Statement) session.getAttribute("statement");
             ResultSet rs = null;
         %>
-        <%
-            try {
-                Class.forName(driver_name).newInstance();
-                connection = DriverManager.getConnection(db_URL, username, password);
-                statement = connection.createStatement();
-            } catch (Exception err) {
-                response.getWriter().println(err);
-                response.getWriter().close();
-                System.out.println(err);
-            }
-        %>
+
         <%
             response.getWriter().println("<div id=\"center-div\">");
             response.getWriter().println("<div id=\"filter-rooms-form\">");
@@ -43,15 +40,8 @@
             response.getWriter().println("<h2>Choose the location</h2>");
             response.getWriter().println("<select name=\"selection\">");
             response.getWriter().println("<option value=\"1\">Abu Dhabi</option>");
-            response.getWriter().println("<option value=\"2\">Dubai</option>");
-            response.getWriter().println("<option value=\"3\">Ras al Khaimah</option>");
-            response.getWriter().println("<option value=\"4\">New York</option>");
-            response.getWriter().println("<option value=\"5\">Tokyo</option>");
-            response.getWriter().println("<option value=\"6\">Paris</option>");
-            response.getWriter().println("<option value=\"7\">Sydney</option>");
-            response.getWriter().println("<option value=\"8\">London</option>");
-            response.getWriter().println("<option value=\"9\">Barcelona</option>");
-            response.getWriter().println("<option value=\"10\">Berlin</option>");
+            response.getWriter().println("<option value=\"2\">New York</option>");
+            response.getWriter().println("<option value=\"3\">Paris</option>");
             response.getWriter().println("</select>");
             response.getWriter().println("<h2>Arrival</h2>");
             response.getWriter().println("<div id=\"date\">");
@@ -65,11 +55,16 @@
             response.getWriter().println("</div>");
             response.getWriter().println("</div>");
             response.getWriter().println("<div id=\"filtered-rooms\">");
-            int hotel_location = Integer.parseInt(request.getParameter("selection"));
-            rs = statement.executeQuery("SELECT Type, Room.`Room#`, Price, Location FROM Room, Hotel WHERE Room.HID = " + hotel_location +" AND Hotel.HID =" + hotel_location);
+            int hotel_location;
+            if (request.getParameter("selection") == null) {
+                hotel_location = 1;
+            } else {
+                hotel_location = Integer.parseInt(request.getParameter("selection"));
+            }
+            rs = statement.executeQuery("SELECT Type, Room.`Room#`, Price, Location FROM Room, Hotel WHERE Room.HID = " + hotel_location + " AND Hotel.HID =" + hotel_location);
 
             while (rs.next()) {
-                response.getWriter().println("<div class=\"rooms\"><img src=\"css/Images/Hotel-Room.jpg\" alt=\"Dummy Image\"> <div class=\"room-type\"><label>Room type: </label> <strong>" + rs.getString("Type") + "</strong></div><div class=\"room-number\"><label>Room Number </label> <strong>" + rs.getString("Room#") + " </strong></div><div class=\"location\"><label>Location: </label><strong>" + rs.getString("Location") + "</strong></div><label class=\"price\">" + rs.getString("Price") + "</label>  <input type=\"hidden\" name=" + rs.getString("Room#") +"><input type=\"submit\" value=\"Book\" class=\"book-btn\"></div>");
+                response.getWriter().println("<div class=\"rooms\"><img src=\"css/Images/Hotel-Room.jpg\" alt=\"Dummy Image\"> <div class=\"room-type\"><label>Room type: </label> <strong>" + rs.getString("Type") + "</strong></div><div class=\"room-number\"><label>Room Number </label> <strong>" + rs.getString("Room#") + " </strong></div><div class=\"location\"><label>Location: </label><strong>" + rs.getString("Location") + "</strong></div><label class=\"price\">" + rs.getString("Price") + "</label>  <input type=\"hidden\" name=" + rs.getString("Room#") + "><input type=\"submit\" value=\"Book\" class=\"book-btn\"></div>");
             }
 
             response.getWriter().println("</div>");
@@ -80,4 +75,3 @@
         %>
     </body>
 </html>
-

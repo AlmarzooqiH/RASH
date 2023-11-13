@@ -3,9 +3,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.*;
 import java.sql.*;
 
 @WebServlet(urlPatterns = {"/loginOrSignupServlet"})
@@ -19,6 +17,11 @@ public class loginOrSignupServlet extends HttpServlet {
         String password = "root";
         Connection connection = null;
         Statement statement = null;
+
+        HttpSession session = request.getSession();
+        session.setAttribute("db_URL", db_URL);
+        session.setAttribute("driver_name", driver_name);
+
         try {
             Class.forName(driver_name).newInstance();
             connection = DriverManager.getConnection(db_URL, username, password);
@@ -28,7 +31,7 @@ public class loginOrSignupServlet extends HttpServlet {
             response.getWriter().close();
             System.out.println(err);
         }
-        response.setContentType("text/html;charset=UTF-8"); 
+        response.setContentType("text/html;charset=UTF-8");
         String login = request.getParameter("login");
         String signup = request.getParameter("signup");
         if (login != null) {
@@ -37,12 +40,20 @@ public class loginOrSignupServlet extends HttpServlet {
             try {
                 ResultSet result = statement.executeQuery("SELECT * FROM `Account` WHERE Username='" + user + "' AND Password=SHA2('" + pass + "', 256)");
                 if (result.next()) {
-                    request.getSession().setAttribute("user", user);
-                    response.sendRedirect(request.getContextPath() + "/landing.jsp");
+                    if (result.getString("TYPE").equals("ADMIN")) {
+                        response.sendRedirect(request.getContextPath() + "/admin.jsp");
+                    } else {
+                        request.getSession().setAttribute("user", user);
+                        response.sendRedirect(request.getContextPath() + "/landing.jsp");
+                    }
                 } else {
                     response.getWriter().println("<center><h1>username or password are invalid!</h1></center>");
                     response.getWriter().close();
                 }
+                session.setAttribute("username", username);
+                session.setAttribute("password", password);
+                session.setAttribute("connection", connection);
+                session.setAttribute("statement", statement);
 
             } catch (Exception err) {
                 response.getWriter().println("<center><h1>username or password are invalid!</h1></center>");
@@ -75,6 +86,13 @@ public class loginOrSignupServlet extends HttpServlet {
                 );
                 response.getWriter().println("<center><h1>Customer has been added successfully</h1></center>");
                 response.getWriter().close();
+
+                session.setAttribute("username", username);
+                session.setAttribute("password", pass);
+                session.setAttribute("firstname", fname);
+                session.setAttribute("lastname", lname);
+                session.setAttribute("email", email);
+                session.setAttribute("phone-number", pnumber);
             } catch (Exception err) {
                 response.getWriter().println(err);
                 response.getWriter().close();

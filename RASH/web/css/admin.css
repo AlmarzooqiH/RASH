@@ -1,0 +1,51 @@
+body{
+    background-color: black;
+}
+
+#table{
+    border: 2px solid black;
+}
+
+.row{
+    display: flex;
+    border-bottom: 2px solid black;
+    text-align: center;
+}
+
+.col{
+    padding: 1% 1% 1% 1%;
+}
+
+.c1{
+    background-color: white;
+}
+
+.c2{
+    background-color: #cfcdca;
+}
+
+.rid{
+    width: 30px;
+    height: 10px;
+}
+
+.roomType{
+    width: 200px;
+    height: 10px
+}
+
+.hid{
+    width: 30px;
+    height: 10px;
+}
+
+.roomNum{
+    width: 120px;
+    height: 10px;
+}
+
+.price{
+    width: 50px;
+    height: 10px;
+}
+

@@ -6,6 +6,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
     Created on : Nov 7, 2023, 3:16:35 PM
     Author     : truedeveloper
 */
+
 #center-div{
     text-align: center;
 }
@@ -13,7 +14,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
     border: 2px solid;
     border-radius: 10px;
     height: 450px;
-    width: 500px;
+    width: 500px; 
     display: inline-block;
     vertical-align: top;
     margin-top: 100px;
@@ -39,12 +40,13 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
 .rooms{
     border: 2px solid;
     border-radius: 5px;
-    height: 400px;
+    height: 200px;
     margin: 7.5px;
     margin-top: 27.5px;
-    width: 450px;
+    width: 200px;
     display: inline-flex;
     flex-direction: column;
+    align-items: center;
     justify-content: space-between;
 }
 
@@ -54,15 +56,10 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
 
 .book-btn {
     width: 100%;
-    height: 15%;
     margin: 0 auto;
 }
 
-.room-type, .room-number, .location{
-    text-align: left;
-    padding-top: 7px;
-}
 img{
-    height: 60%;
+    height: 75%;
     width:100%;
 }

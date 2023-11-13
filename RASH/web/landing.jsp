@@ -1,19 +1,24 @@
-<%-- 
-    Document   : landing
-    Created on : Nov 6, 2023, 6:13:22 PM
-    Author     : truedeveloper
---%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page import ="java.sql.*"%>
+<%@page import ="javax.servlet.http.*"%>
+<%@page session ="true"%>
 <!DOCTYPE html>
-
 <html>
-
     <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>Book a room</title>
         <link rel="stylesheet" href="css/landing.css" type="text/css">
     </head>
-
     <body>
+        <%
+            //String db_URL = (String) session.getAttribute("db_URL");
+            //String driver_name = (String) session.getAttribute("driver_name");
+            //String username = (String) session.getAttribute("username");
+            //String password = (String) session.getAttribute("password");
+            Connection connection = (Connection) session.getAttribute("connection");
+            Statement statement = (Statement) session.getAttribute("statement");
+        %>
+
         <div id="d1">
             <header>
                 <img src="css/Images/rash.png" id="logo">
@@ -116,5 +121,3 @@
         </div>
     </body>
     <footer></footer>
-
-</html>

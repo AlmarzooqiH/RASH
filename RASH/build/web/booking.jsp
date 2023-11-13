@@ -30,9 +30,6 @@
             Connection connection = (Connection) session.getAttribute("connection");
             Statement statement = (Statement) session.getAttribute("statement");
             ResultSet rs = null;
-        %>
-
-        <%
             response.getWriter().println("<div id=\"center-div\">");
             response.getWriter().println("<div id=\"filter-rooms-form\">");
             response.getWriter().println("<form action=\"\" method=\"POST\" id=\"filter\">");
@@ -64,14 +61,13 @@
             rs = statement.executeQuery("SELECT Type, Room.`Room#`, Price, Location FROM Room, Hotel WHERE Room.HID = " + hotel_location + " AND Hotel.HID =" + hotel_location);
 
             while (rs.next()) {
-                response.getWriter().println("<div class=\"rooms\"><img src=\"css/Images/Hotel-Room.jpg\" alt=\"Dummy Image\"> <div class=\"room-type\"><label>Room type: </label> <strong>" + rs.getString("Type") + "</strong></div><div class=\"room-number\"><label>Room Number </label> <strong>" + rs.getString("Room#") + " </strong></div><div class=\"location\"><label>Location: </label><strong>" + rs.getString("Location") + "</strong></div><label class=\"price\">" + rs.getString("Price") + "</label>  <input type=\"hidden\" name=" + rs.getString("Room#") + "><input type=\"submit\" value=\"Book\" class=\"book-btn\"></div>");
+//                System.out.println("<div class=\"rooms\"><img src=\"css/Images/Hotel-Room.jpg\" alt=\"Dummy Image\"> <div class=\"room-type\"><label>Room type: </label> <strong>" + rs.getString("Type") + "</strong></div><div class=\"room-number\"><label>Room Number </label> <strong>" + rs.getString("Room#") + " </strong></div><div class=\"location\"><label>Location: </label><strong>" + rs.getString("Location") + "</strong></div><label class=\"price\">" + rs.getString("Price") + "</label>  <input type=\"hidden\" name=\"selectedRoom\"value=" + rs.getString("Room#") + "><input type=\"submit\" value=\"Book\" class=\"book-btn\"></div>");
+                response.getWriter().println("<form action=\"ProcessBooking\" method=\"POST\" class=\"rooms\"><img src=\"css/Images/Hotel-Room.jpg\" alt=\"Dummy Image\"> <div class=\"room-type\"><label>Room type: </label> <strong>" + rs.getString("Type") + "</strong></div><div class=\"room-number\"><label>Room Number </label> <strong>" + rs.getString("Room#") + " </strong></div><div class=\"location\"><label>Location: </label><strong>" + rs.getString("Location") + "</strong></div><label class=\"price\">" + rs.getString("Price") + "</label>  <input type=\"hidden\" name=\"selectedRoom\"value=" + rs.getString("Room#") + "><input type=\"submit\" value=\"Book\" class=\"book-btn\"></form>");
             }
+            
+            response.getWriter().println("</div>");
+            response.getWriter().println("</div>");
 
-            response.getWriter().println("</div>");
-            response.getWriter().println("</div>");
-            connection.close();
-            statement.close();
-            rs.close();
         %>
     </body>
 </html>

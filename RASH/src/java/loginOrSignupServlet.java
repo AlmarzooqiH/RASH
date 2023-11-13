@@ -43,15 +43,15 @@ public class loginOrSignupServlet extends HttpServlet {
                     if (result.getString("TYPE").equals("ADMIN")) {
                         response.sendRedirect(request.getContextPath() + "/admin.jsp");
                     } else {
-                        request.getSession().setAttribute("user", user);
                         response.sendRedirect(request.getContextPath() + "/landing.jsp");
                     }
                 } else {
                     response.getWriter().println("<center><h1>username or password are invalid!</h1></center>");
                     response.getWriter().close();
                 }
-                session.setAttribute("username", username);
-                session.setAttribute("password", password);
+                request.getSession().setAttribute("user", user);
+                request.getSession().setAttribute("pass", user);
+                request.getSession().setAttribute("aid", result.getString("ID"));
                 session.setAttribute("connection", connection);
                 session.setAttribute("statement", statement);
 
@@ -84,15 +84,17 @@ public class loginOrSignupServlet extends HttpServlet {
                         + "'" + aid + "',"
                         + "'" + email + "')"
                 );
-                response.getWriter().println("<center><h1>Customer has been added successfully</h1></center>");
-                response.getWriter().close();
-
-                session.setAttribute("username", username);
-                session.setAttribute("password", pass);
+                session.setAttribute("user", user);
+                session.setAttribute("aid", aid);
+                session.setAttribute("pass", pass);
                 session.setAttribute("firstname", fname);
                 session.setAttribute("lastname", lname);
                 session.setAttribute("email", email);
                 session.setAttribute("phone-number", pnumber);
+                session.setAttribute("connection", connection);
+                session.setAttribute("statement", statement);
+                response.sendRedirect(request.getContextPath() + "/landing.jsp");
+                response.getWriter().close();
             } catch (Exception err) {
                 response.getWriter().println(err);
                 response.getWriter().close();

@@ -51,7 +51,7 @@ public class loginOrSignupServlet extends HttpServlet {
                 }
                 request.getSession().setAttribute("user", user);
                 request.getSession().setAttribute("pass", user);
-                request.getSession().setAttribute("aid", result.getString("ID"));
+                request.getSession().setAttribute("aid", (Object)result.getString("ID"));
                 session.setAttribute("connection", connection);
                 session.setAttribute("statement", statement);
 

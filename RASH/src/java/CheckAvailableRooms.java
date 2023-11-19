@@ -40,7 +40,7 @@ public class CheckAvailableRooms extends HttpServlet {
         ResultSet rs = null;
         ArrayList<Integer> occupiedRooms = new ArrayList<Integer>();
         try {
-            rs = statement.executeQuery("SELECT RID FROM BOOKING WHERE ARRIVAL<='" + request.getParameter("arrival") + "' AND Departure >='" + request.getParameter("departure") + "';");
+            rs = statement.executeQuery("SELECT RID FROM BOOKING WHERE ARRIVAL='" + request.getParameter("arrival") + "' AND Departure ='" + request.getParameter("departure") + "';");
             if (rs != null) {
                 while (rs.next()) {
                     occupiedRooms.add(Integer.parseInt(rs.getString("RID")));
@@ -49,8 +49,9 @@ public class CheckAvailableRooms extends HttpServlet {
             session.setAttribute("connection", connection);
             session.setAttribute("statement", statement);
             session.setAttribute("occupiedRooms", occupiedRooms);
-            request.setAttribute("arrivalDate", request.getParameter("arrival"));
-            request.setAttribute("departureDate", request.getParameter("departure"));
+            session.setAttribute("arrivalDate", request.getParameter("arrival"));
+            session.setAttribute("departureDate", request.getParameter("departure"));
+            session.setAttribute("selection", request.getParameter("selection"));
             response.sendRedirect(request.getContextPath() + "/booking.jsp");
         } catch (Exception err) {
             out.println(err.getMessage());

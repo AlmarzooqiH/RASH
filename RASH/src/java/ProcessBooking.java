@@ -35,18 +35,20 @@ public class ProcessBooking extends HttpServlet {
         HttpSession session = request.getSession();
         Connection con = (Connection) session.getAttribute("connection");
         Statement stmt = (Statement) session.getAttribute("statement");
-        Date arrivalDate = (Date) request.getAttribute("arrivalDate");
-        Date departureDate = (Date)request.getAttribute("departureDate");
+
         try {
             ResultSet rs = stmt.executeQuery("SELECT CID FROM Account, Customer WHERE " + session.getAttribute("aid") + "= Customer.AID");
 //            response.getWriter().println(rs.next());
 //            response.getWriter().println(rs.getString("CID"));
             if (rs.next()) {
-            int customerID = Integer.parseInt(rs.getString("CID"));
-            int roomID = Integer.parseInt(request.getParameter("selectedRoom"));
-            int didAdd = stmt.executeUpdate("INSERT INTO `Booking`(`Arrival`, `Departure`, `CID`, `RID`) VALUES ('" + arrivalDate.toString() + "', '" + departureDate.toString() + "', '" + customerID + "', '" + roomID + "')");    
+                int customerID = Integer.parseInt(rs.getString("CID"));
+                int roomID = Integer.parseInt(request.getParameter("selectedRoom"));
+                int hid = Integer.parseInt(request.getParameter("hid"));
+                String arrival = request.getParameter("arrivalDate");
+                String departure = request.getParameter("departureDate");
+                stmt.executeUpdate("INSERT INTO `Booking`(`Arrival`, `Departure`, `CID`, `RID`, `HID`) VALUES ('" + arrival + "','" + departure + "','" + customerID + "','" + roomID + "','" + hid + "')");
             }
-            
+
             session.setAttribute("connection", con);
             session.setAttribute("statement", stmt);
             response.sendRedirect(request.getContextPath() + "/booking.jsp");
@@ -56,7 +58,7 @@ public class ProcessBooking extends HttpServlet {
             response.getWriter().println("<br>Failed to add a room");
             session.setAttribute("connection", con);
             session.setAttribute("statement", stmt);
-//            response.sendRedirect(request.getContextPath() + "/booking.jsp");
+            response.sendRedirect(request.getContextPath() + "/booking.jsp");
             System.err.println("FAILED TO ADD THE ROOM!!!!!!!");
             response.getWriter().close();
         }

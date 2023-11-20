@@ -42,7 +42,7 @@ public class adminAddBookingPage extends HttpServlet {
 
                 output.println("<div id=\"center-div\">");
                 output.println("<div id=\"filter-rooms-form\">");
-                output.println("<form action=\"ProcessBooking\" method=\"GET\" id=\"filter\">");
+                output.println("<form action=\"ProcessBooking\" method=\"POST\" id=\"filter\">");
                 output.println("<div id=\"center-elements\">");
                 output.println("<h2>Choose the location</h2>");
                 output.println("<select name=\"selection\">");

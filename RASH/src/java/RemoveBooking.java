@@ -47,7 +47,7 @@ public class RemoveBooking extends HttpServlet {
             session.setAttribute("connection", connection);
             session.setAttribute("statement", statement);
 
-//            response.sendRedirect(request.getContextPath() + "/adminbookings.jsp");
+            response.sendRedirect(request.getContextPath() + "/adminbookings.jsp");
         }
     }
 

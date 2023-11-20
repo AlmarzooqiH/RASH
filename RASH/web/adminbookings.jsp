@@ -11,12 +11,6 @@
         <title>ADMIN Page</title>
     </head>
     <%
-        //String db_URL = (String) session.getAttribute("db_URL");
-        //String db_URL = "jdbc:mysql://localhost:8889/RASH_HOTEL?autoReconnect=true&useSSL=false";
-        //String driver_name = (String) session.getAttribute("driver_name");
-        //String username = (String) session.getAttribute("username");
-        //String password = (String) session.getAttribute("password");
-        //Connection connection = DriverManager.getConnection(db_URL, username, password);
         Connection connection = (Connection) session.getAttribute("connection");
         Statement statement = (Statement) session.getAttribute("statement");
         ResultSet rs = null;
@@ -33,7 +27,7 @@
         res.println("<a href='adminbookings.jsp'>Bookings</a>");
         res.println("</div>");
         res.println("<div class='tab'>");
-        res.println("<a href='admincustomers.jsp'>Custmers</a>");
+        res.println("<a href='admincustomers.jsp'>Customers</a>");
         res.println("</div>");
 
         res.println("</header>");

@@ -136,7 +136,6 @@ public class ProcessBooking extends HttpServlet {
             String arrival = request.getParameter("arrival");
             String departure = request.getParameter("departure");
             stmt.executeUpdate("INSERT INTO `Booking`(`Arrival`, `Departure`, `CID`, `RID`, `HID`) VALUES ('" + arrival + "','" + departure + "','" + customerID + "','" + roomID + "','" + hotel_location + "')");
-
             session.setAttribute("connection", con);
             session.setAttribute("statement", stmt);
             response.sendRedirect(request.getContextPath() + "/admin.jsp");

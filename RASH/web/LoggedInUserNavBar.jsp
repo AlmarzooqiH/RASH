@@ -19,7 +19,6 @@
             <ul>
                 <li><a href="booking.jsp">Book</a></li>
                 <li><a href="myBookings.jsp">My Bookings</a></li>
-                <li><button></button></li>
             </ul>
         </div>
     </div>

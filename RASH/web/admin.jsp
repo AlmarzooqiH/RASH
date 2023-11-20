@@ -33,7 +33,7 @@
         res.println("<a href='adminbookings.jsp'>Bookings</a>");
         res.println("</div>");
         res.println("<div class='tab'>");
-        res.println("<a href='admin.jsp'>Custmers</a>");
+        res.println("<a href='admincustomers.jsp'>Customers</a>");
         res.println("</div>");
 
         res.println("</header>");

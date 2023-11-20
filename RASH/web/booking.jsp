@@ -29,7 +29,7 @@
         <link rel="stylesheet" href="css/bookARoom.css" type="text/css">
     </head>
     <body>
-        <jsp:include page="LogoAndNavbar.jsp"></jsp:include>
+        <jsp:include page="LoggedInUserNavBar.jsp"></jsp:include>
         <%
             Connection connection = (Connection) session.getAttribute("connection");
             Statement statement = (Statement) session.getAttribute("statement");
@@ -58,12 +58,6 @@
             output.println("</div>");
             output.println("<div id=\"filtered-rooms\">");
             try {
-//                int hotel_location = 1;
-//                if (request.getParameter("selection") != null) {
-//                    hotel_location = Integer.parseInt(request.getParameter("selection"));
-//                } else {
-//                    hotel_location = 1;
-//                }
                 int hotel_location;
                 if (((String)session.getAttribute("selection")) == null) {
                     hotel_location = 1;
@@ -96,6 +90,7 @@
                                 + "<input type=\"hidden\" name=\"arrivalDate\" value=\"" + arrivalDate + "\">"
                                 + "<input type=\"hidden\" name=\"departureDate\" value=\"" + departureDate + "\">"
                                 + "<input type=\"hidden\" name=\"hid\" value=\"" + hotel_location + "\">"
+                                + "<input type=\"hidden\" name=\"action\" value=\"customer\">"
                                 + "<input type=\"submit\" value=\"Book\" class=\"book-btn\">"
                                 + "</form>");
                     }

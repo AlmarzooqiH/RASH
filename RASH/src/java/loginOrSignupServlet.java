@@ -39,6 +39,7 @@ public class loginOrSignupServlet extends HttpServlet {
             String pass = request.getParameter("password");
             try {
                 ResultSet result = statement.executeQuery("SELECT * FROM `Account` WHERE Username='" + user + "' AND Password=SHA2('" + pass + "', 256)");
+
                 if (result.next()) {
                     if (result.getString("TYPE").equals("ADMIN")) {
                         response.sendRedirect(request.getContextPath() + "/admin.jsp");
@@ -51,7 +52,7 @@ public class loginOrSignupServlet extends HttpServlet {
                 }
                 request.getSession().setAttribute("user", user);
                 request.getSession().setAttribute("pass", user);
-                request.getSession().setAttribute("aid", (Object)result.getString("ID"));
+                request.getSession().setAttribute("aid", result.getString("ID"));
                 session.setAttribute("connection", connection);
                 session.setAttribute("statement", statement);
 

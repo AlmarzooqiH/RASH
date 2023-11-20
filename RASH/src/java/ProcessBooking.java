@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.sql.*;
-import java.util.Date;
+
 /**
  *
  * @author truedeveloper
@@ -32,37 +32,23 @@ public class ProcessBooking extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        HttpSession session = request.getSession();
-        Connection con = (Connection) session.getAttribute("connection");
-        Statement stmt = (Statement) session.getAttribute("statement");
-
         try {
-            ResultSet rs = stmt.executeQuery("SELECT CID FROM Account, Customer WHERE " + session.getAttribute("aid") + "= Customer.AID");
-//            response.getWriter().println(rs.next());
-//            response.getWriter().println(rs.getString("CID"));
-            if (rs.next()) {
-                int customerID = Integer.parseInt(rs.getString("CID"));
-                int roomID = Integer.parseInt(request.getParameter("selectedRoom"));
-                int hid = Integer.parseInt(request.getParameter("hid"));
-                String arrival = request.getParameter("arrivalDate");
-                String departure = request.getParameter("departureDate");
-                stmt.executeUpdate("INSERT INTO `Booking`(`Arrival`, `Departure`, `CID`, `RID`, `HID`) VALUES ('" + arrival + "','" + departure + "','" + customerID + "','" + roomID + "','" + hid + "')");
+
+            HttpSession session = request.getSession();
+            Connection con = (Connection) session.getAttribute("connection");
+            Statement stmt = (Statement) session.getAttribute("statement");
+            String action = request.getParameter("action");
+            if (action.equals("customer")) {
+                response.getWriter().println("<center><h1>In Cusotmer</h1></center>");
+                customerAddBooking(request, response, session, con, stmt);
+            } else if (action.equals("admin")) {
+                response.getWriter().println("<center><h1>In Admmin</h1></center>");
+                int customerID = Integer.parseInt(request.getParameter("customerID"));
+                adminAddBooking(request, response, session, con, stmt, customerID);
             }
-
-            session.setAttribute("connection", con);
-            session.setAttribute("statement", stmt);
-            response.sendRedirect(request.getContextPath() + "/booking.jsp");
         } catch (Exception err) {
-            System.err.println(err);
-            response.getWriter().println(err);
-            response.getWriter().println("<br>Failed to add a room");
-            session.setAttribute("connection", con);
-            session.setAttribute("statement", stmt);
-            response.sendRedirect(request.getContextPath() + "/booking.jsp");
-            System.err.println("FAILED TO ADD THE ROOM!!!!!!!");
-            response.getWriter().close();
+            response.getWriter().println("<center><h1>" + err.getMessage() + "</h1></center>");
         }
-
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -104,4 +90,64 @@ public class ProcessBooking extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
+    void customerAddBooking(HttpServletRequest request, HttpServletResponse response, HttpSession session, Connection con, Statement stmt)
+            throws ServletException, IOException {
+        try {
+            ResultSet rs = stmt.executeQuery("SELECT CID FROM Account, Customer WHERE " + session.getAttribute("aid") + "= Customer.AID");
+//            response.getWriter().println(rs.next());
+//            response.getWriter().println(rs.getString("CID"));
+            if (rs.next()) {
+                int customerID = Integer.parseInt(rs.getString("CID"));
+                int roomID = Integer.parseInt(request.getParameter("selectedRoom"));
+                int hid = Integer.parseInt(request.getParameter("hid"));
+                String arrival = request.getParameter("arrivalDate");
+                String departure = request.getParameter("departureDate");
+                stmt.executeUpdate("INSERT INTO `Booking`(`Arrival`, `Departure`, `CID`, `RID`, `HID`) VALUES ('" + arrival + "','" + departure + "','" + customerID + "','" + roomID + "','" + hid + "')");
+            }
+
+            session.setAttribute("connection", con);
+            session.setAttribute("statement", stmt);
+            response.sendRedirect(request.getContextPath() + "/booking.jsp");
+        } catch (Exception err) {
+            System.err.println(err);
+            response.getWriter().println(err);
+            response.getWriter().println("<br>Failed to add a room");
+            session.setAttribute("connection", con);
+            session.setAttribute("statement", stmt);
+            response.sendRedirect(request.getContextPath() + "/booking.jsp");
+            System.err.println("FAILED TO ADD THE ROOM!!!!!!!");
+        }
+    }
+
+    void adminAddBooking(HttpServletRequest request, HttpServletResponse response, HttpSession session, Connection con, Statement stmt, int customerID)
+            throws ServletException, IOException {
+        try {
+            response.getWriter().println("<center><h1>In admin fjunctoij</h1></center>");
+
+            int roomID = Integer.parseInt(request.getParameter("rid"));
+            response.getWriter().println("<center><h1>,kjhgfdfhcgjvhkjlklihougiyfturdy</h1></center>");
+            int hotel_location;
+            if (((String) session.getAttribute("selection")) == null) {
+                hotel_location = 1;
+            } else {
+                hotel_location = Integer.parseInt(((String) session.getAttribute("selection")));
+            }
+
+            String arrival = request.getParameter("arrival");
+            String departure = request.getParameter("departure");
+            stmt.executeUpdate("INSERT INTO `Booking`(`Arrival`, `Departure`, `CID`, `RID`, `HID`) VALUES ('" + arrival + "','" + departure + "','" + customerID + "','" + roomID + "','" + hotel_location + "')");
+
+            session.setAttribute("connection", con);
+            session.setAttribute("statement", stmt);
+            response.sendRedirect(request.getContextPath() + "/admin.jsp");
+        } catch (Exception err) {
+            System.err.println(err);
+            response.getWriter().println(err);
+            response.getWriter().println("<br>Failed to add a room");
+            session.setAttribute("connection", con);
+            session.setAttribute("statement", stmt);
+            response.sendRedirect(request.getContextPath() + "/admin.jsp");
+            System.err.println("FAILED TO ADD THE ROOM!!!!!!!");
+        }
+    }
 }

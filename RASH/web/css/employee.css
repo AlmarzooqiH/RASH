@@ -1,0 +1,81 @@
+header{
+    display: flex;
+    border-bottom: 2px solid black;
+    color: black;
+    background-color: white;
+    text-size: 10px;
+}
+
+a{
+    color: black;
+    text-decoration: none;
+}
+
+a:visited{
+    color: black;
+    text-decoration: none;
+}
+
+.tab{
+    padding:1% 1% 1% 1%;
+}
+
+body{
+    background-color: white;
+    margin: 0 0 0 0;
+}
+
+#table{
+    border: 2px solid black;
+    text-align: center;
+}
+
+.row{
+    border-bottom: 2px solid black;
+    text-align: center;
+    margin-bottom: 0;
+    display: flex;
+}
+
+.col{
+    padding: 1% 1% 1% 1%;
+}
+
+.c1{
+    background-color: white;
+}
+
+.c2{
+    background-color: #cfcdca;
+}
+
+.id{
+    width: 30px;
+    height: 10px;
+}
+
+.roomType{
+    width: 200px;
+    height: 10px
+}
+
+.roomNum{
+    width: 150px;
+    height: 10px;
+}
+
+.price{
+    width: 50px;
+    height: 10px;
+}
+
+.button{
+    width: 100px;
+    height: 10px;
+}
+
+button{
+    cursor: pointer;
+}
+
+

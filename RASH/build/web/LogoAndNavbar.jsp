@@ -19,7 +19,7 @@
             <ul>
                 <li><a href="index.html">Home</a></li>
                 <li><a href="Locations.jsp">Locations</a></li>
-                <li><a href="aboutUs.html">About Us</a></li>
+                <li><a href="aboutUs.jsp">About Us</a></li>
                 <li><a href="login-signup.jsp">Log In</a></li>
             </ul>
         </div>

@@ -101,7 +101,7 @@
                 <div class="text" id="lefttext">
                     <div class="heading">
                         <h5>Come and Experience</h5>
-                        <h2>Our Luxorious Spa</h2>
+                        <h2>Our Luxurious Spa</h2>
                     </div>
 
                     <div class="para">
@@ -115,9 +115,9 @@
         </section>
 
         <div id="lastdiv">
-            <button id="lastbtn">
+            <a  href="booking.jsp"><button id="lastbtn">
                 <font id="lastbtnfont">Join The Experience Here</font>
-            </button>
+                </button></a>
         </div>
     </body>
     <footer></footer>

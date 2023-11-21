@@ -72,6 +72,7 @@
             res.println("<div class='col c2 roomNum'>" + phoneNum + "</div>");
             res.println("<div class='col c1 button'> <input type=\"submit\" value=\"cancel\"/> </div>");
             res.println("<input type='hidden' name='rid' value='" + bid + "'>");
+            res.println("<input type='hidden' name='action' value=\"admin\"'>");
             res.println("</form>");
         }
         //table end

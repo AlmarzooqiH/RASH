@@ -63,6 +63,7 @@ public class adminAddBookingPage extends HttpServlet {
                 output.println("<br>");
                 output.println("<label>Departure Date</label> <input type=\"date\" name=\"departure\">");
                 output.println("</div>");
+
                 output.println("<input type=\"submit\" value=\"Book a Room\">");
                 output.println("<input type='hidden' name='action' value='admin'>");
                 output.println("<input type='hidden' name='rid' value='" + request.getParameter("rid") + "'>");

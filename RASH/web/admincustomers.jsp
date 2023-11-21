@@ -9,7 +9,6 @@
         <link rel="stylesheet" href="css/Admin_View_Customers.css" type="text/css">
     </head>
     <%
-        
         PrintWriter output = response.getWriter();
         String[] column_names = {"Fname", "Lname", "CID", "Phone#", "AID", "Email"};
         Connection connection = (Connection) session.getAttribute("connection");

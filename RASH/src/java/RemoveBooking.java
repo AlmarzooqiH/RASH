@@ -36,22 +36,21 @@ public class RemoveBooking extends HttpServlet {
         Connection connection = (Connection) session.getAttribute("connection");
         Statement statement = (Statement) session.getAttribute("statement");
         try {
-            PrintWriter out = response.getWriter();
-            int removedRoom = Integer.parseInt(request.getParameter("rid"));
-            session.setAttribute("connection", connection);
-            session.setAttribute("statement", statement);
-            int didRemove = statement.executeUpdate("DELETE FROM `Booking` WHERE Booking.bid=" + removedRoom);
-            response.sendRedirect(request.getContextPath() + "/adminbookings.jsp");
+            String action = request.getParameter("action");
+            if (action.equals("customer")) {
+
+                response.getWriter().println("<center><h1>In Cusotmer</h1></center>");
+                customerRemoveBooking(request, response, session, connection, statement);
+            } else if (action.equals("admin")) {
+                response.getWriter().println("<center><h1>In Admmin</h1></center>");
+                adminRemoveBooking(request, response, session, connection, statement);
+            }
         } catch (Exception err) {
             response.getWriter().println("<center><h1>" + err.getMessage() + "</h1></center>");
-            session.setAttribute("connection", connection);
-            session.setAttribute("statement", statement);
-
-            response.sendRedirect(request.getContextPath() + "/adminbookings.jsp");
         }
     }
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+// <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
      *
@@ -90,4 +89,37 @@ public class RemoveBooking extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
+    void customerRemoveBooking(HttpServletRequest request, HttpServletResponse response, HttpSession session, Connection connection, Statement statement) throws ServletException, IOException {
+        try {
+            PrintWriter out = response.getWriter();
+            int removedRoom = Integer.parseInt(request.getParameter("rid"));
+            session.setAttribute("connection", connection);
+            session.setAttribute("statement", statement);
+            int didRemove = statement.executeUpdate("DELETE FROM `Booking` WHERE Booking.bid=" + removedRoom);
+            response.sendRedirect(request.getContextPath() + "/myBookings.jsp");
+        } catch (Exception err) {
+            response.getWriter().println("<center><h1>" + err.getMessage() + "</h1></center>");
+            session.setAttribute("connection", connection);
+            session.setAttribute("statement", statement);
+
+            response.sendRedirect(request.getContextPath() + "/myBookings.jsp");
+        }
+    }
+
+    void adminRemoveBooking(HttpServletRequest request, HttpServletResponse response, HttpSession session, Connection connection, Statement statement) throws ServletException, IOException {
+        try {
+            PrintWriter out = response.getWriter();
+            int removedRoom = Integer.parseInt(request.getParameter("rid"));
+            session.setAttribute("connection", connection);
+            session.setAttribute("statement", statement);
+            int didRemove = statement.executeUpdate("DELETE FROM `Booking` WHERE Booking.bid=" + removedRoom);
+            response.sendRedirect(request.getContextPath() + "/adminbookings.jsp");
+        } catch (Exception err) {
+            response.getWriter().println("<center><h1>" + err.getMessage() + "</h1></center>");
+            session.setAttribute("connection", connection);
+            session.setAttribute("statement", statement);
+            response.sendRedirect(request.getContextPath() + "/adminbookings.jsp");
+        }
+    }
 }
+

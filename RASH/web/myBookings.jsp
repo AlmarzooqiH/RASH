@@ -1,84 +1,76 @@
+<%@page import="java.sql.*"%>
+<%@page import="java.io.PrintWriter"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@page import ="java.sql.*"%>
-<%@page import ="javax.servlet.http.*"%>
-<%@page import = "java.io.*"%>
-<%@page session ="true"%>
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <link rel="stylesheet" href="css/employee.css" type="text/css">
-        <title>My Bookings</title>
+        <title>Customers Page</title>
+        <link rel="stylesheet" href="css/myBooking.css" type="text/css">
+        <link rel="stylesheet" href="css/LogoAndNavBar.css" type="text/css">
     </head>
     <%
+        PrintWriter output = response.getWriter();
+        String[] column_names = {"BID", "Hotel.Location", "Arrival", "Departure", "Booking.RID"};
         Connection connection = (Connection) session.getAttribute("connection");
         Statement statement = (Statement) session.getAttribute("statement");
-        ResultSet rs = null;
-        PrintWriter res = response.getWriter();
-    %>
-    <%--<jsp:include page="LoggedInUserNavBar.jsp"></jsp:include>--%>
-    <%
-        //body starts
+        output.println("<body>");
+        out.println("<div class=\"banner\">"
+                + "<div class=\"navbar\">"
+                + "<img src=\"css/Images/RASH-removebg-preview.png\" alt=\"Rash Hotels\" class=\"logo\">"
+                + "<ul>"
+                + "<li><a href=\"booking.jsp\">Book</a></li>"
+                + "<li><a href=\"myBookings.jsp\">My Bookings</a></li>"
+                + "</ul>"
+                + "</div>"
+                + "</div>");
+        output.println("<header>");
+        output.println("<table>");
+        output.println("<th>");
+        output.println("<tr>");
+        for (int i = 0; i < column_names.length; i++) {
+            if (i == 1) {
+                output.println("<td><strong><h2>Location</h2></strong></td>");
+                continue;
+            } else if (i == 4) {
+                output.println("<td><strong><h2>Room#</h2></strong></td>");
+                break;
+            }
+            output.println("<td><strong><h2>" + column_names[i] + "</h2></strong></td>");
+        }
+        output.println("</th>");
+        output.println("</tr>");
         try {
-            res.println("<body>");
-            try {
-                rs = statement.executeQuery("SELECT * FROM BOOKING WHERE BOOKING.CID IN (SELECT CID FROM ACCOUNT, CUSTOMER WHERE CUSTOMER.AID=" + ((String) session.getAttribute("aid")) + ")");
-                int customerID = Integer.parseInt(rs.getString("CID"));
-                if(rs == null)
-                {
-                    return ;
-                }
-            } catch (Exception err) {
-//                response.getWriter().println(err.getMessage());
-                session.setAttribute("connection", connection);
-                session.setAttribute("statement", statement);
-            }
-            //table start
-            res.println("<section id='table'>");
+            ResultSet rs = statement.executeQuery("SELECT Booking.BID, Hotel.Location, Booking.Arrival, Booking.Departure, Booking.RID FROM Booking JOIN Hotel ON Booking.HID = Hotel.HID JOIN Customer ON Booking.CID = Customer.CID WHERE Customer.AID = " + ((String) request.getSession().getAttribute("aid")) + " AND Hotel.HID = Booking.HID;");
 
-            res.println("<div class='row'>");
-            res.println("<div class='col c1 id'>BID</div>");
-            res.println("<div class='col c2 id'>RID</div>");
-            res.println("<div class='col c1 roomNum'>Arrival</div>");
-            res.println("<div class='col c2 roomNum'>Departure</div>");
-            res.println("<div class='col c1 id'>CID</div>");
-            res.println("<div class='col c1 button'> </div>");
-            res.println("</div>");
-//            res.println(rs.getArray("BID"));
-//int i = 0;
+            if (rs == null) {
+                return;
+            }
             while (rs.next()) {
-//                res.println(i);
-//                i++;
-                String bid = rs.getString("booking.BID");
-                String arrival = rs.getString("booking.Arrival");
-                String departure = rs.getString("booking.Departure");
-                String cid = rs.getString("booking.CID");
-                String rid = rs.getString("booking.RID");
-
-                // Display data as list items
-                res.println("<form action=\"RemoveBooking\" method=\"POST\" class='row'>");
-                res.println("<div class='col c1 id'>" + bid + "</div>");
-                res.println("<div class='col c2 id'>" + rid + "</div>");
-                res.println("<div class='col c1 roomNum'>" + arrival + "</div>");
-                res.println("<div class='col c2 roomNum'>" + departure + "</div>");
-                res.println("<div class='col c1 id'>" + cid + "</div>");
-                res.println("<div class='col c1 button'> <input type=\"submit\" value=\"cancel\"/> </div>");
-                res.println("<input type='hidden' name='rid' value='" + bid + "'>");
-                res.println("</form>");
+                output.println("<form action=\"RemoveBooking\" method=\"POST\">");
+                output.println("<tr>");
+                for (int i = 0; i < column_names.length; i++) {
+                    output.println("<td>" + rs.getString(column_names[i]) + "</td>");
+                }
+                output.println("<input type='hidden' name='rid' value=" + rs.getString("Booking.BID") + ">");
+                output.println("<input type='hidden' name='action' value=\"customer\"'>");
+                output.println("<td><input type=\"submit\" value=\"Cancel Booking\"/></td>");
+                output.println("</tr>");
+                output.println("</form>");
             }
-            //table end
-            res.println("</section>");
-
-            //body ends
-            res.println("</body>");
         } catch (Exception err) {
-                        response.getWriter().println("<center><h1>You don't have any bookings.</h1></center>");
-//            response.getWriter().println(err);
+            response.getWriter().println("<center>" + err + "</h1></center>");
             session.setAttribute("connection", connection);
             session.setAttribute("statement", statement);
         }
+
+        output.println("</table>");
+
+        output.println("</body>");
+
+
     %>
 
-</body>
-<footer></footer>
 </html>
+
+

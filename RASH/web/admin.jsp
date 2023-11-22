@@ -70,6 +70,7 @@
             res.println("<div class='col c1 price'>" + price + "</div>");
             res.println("<div class='col c2 button'> <button>book</button> </div>");
             res.println("<input type='hidden' name='rid' value='" + rid + "'>");
+            res.println("<input type='hidden' name='hid' value='" + hid + "'>");
             res.println("<input type='hidden' name='action' value='admin'>");
             res.println("</form>");
         }

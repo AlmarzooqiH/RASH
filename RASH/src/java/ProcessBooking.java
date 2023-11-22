@@ -126,13 +126,7 @@ public class ProcessBooking extends HttpServlet {
 
             int roomID = Integer.parseInt(request.getParameter("rid"));
             response.getWriter().println("<center><h1>,kjhgfdfhcgjvhkjlklihougiyfturdy</h1></center>");
-            int hotel_location;
-            if (((String) session.getAttribute("selection")) == null) {
-                hotel_location = 1;
-            } else {
-                hotel_location = Integer.parseInt(((String) session.getAttribute("selection")));
-            }
-
+            int hotel_location = Integer.parseInt(request.getParameter("hid"));
             String arrival = request.getParameter("arrival");
             String departure = request.getParameter("departure");
             stmt.executeUpdate("INSERT INTO `Booking`(`Arrival`, `Departure`, `CID`, `RID`, `HID`) VALUES ('" + arrival + "','" + departure + "','" + customerID + "','" + roomID + "','" + hotel_location + "')");

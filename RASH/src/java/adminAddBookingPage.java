@@ -39,16 +39,19 @@ public class adminAddBookingPage extends HttpServlet {
             Statement statement = (Statement) session.getAttribute("statement");
             try {
                 ResultSet rs = statement.executeQuery("SELECT AID,CID FROM CUSTOMER");
-
-                output.println("<div id=\"center-div\">");
-                output.println("<div id=\"filter-rooms-form\">");
-                output.println("<form action=\"ProcessBooking\" method=\"POST\" id=\"filter\">");
-                output.println("<div id=\"center-elements\">");
-                output.println("<h2>Choose the location</h2>");
-                output.println("<select name=\"selection\">");
-                output.println("<option value=\"1\">Abu Dhabi</option>");
-                output.println("<option value=\"2\">New York</option>");
-                output.println("<option value=\"3\">Paris</option>");
+                output.println("<script>");
+                output.println("function updateSubmitButton() {");
+                output.println("var arrivalDate = document.getElementsByName('arrival')[0].value;");
+                output.println("var departureDate = document.getElementsByName('departure')[0].value;");
+                output.println("var submitButton = document.getElementById('findRoomButton');");
+                output.println("var dateCompare = new Date(departureDate) - new Date(arrivalDate);");
+                output.println("submitButton.disabled = (dateCompare <= 0) || (departureDate == null) || (departureDate == '');");
+                output.println("}");
+                output.println("window.onload = function () {");
+                output.println("updateSubmitButton();");
+                output.println("};");
+                output.println("</script>");
+                output.println("<form action=\"ProcessBooking\" method=\"POST\"");
                 output.println("</select><br><h1>Select Customer</h1>");
                 output.println("<select name=\"customerID\">");
                 while (rs.next()) {
@@ -59,21 +62,24 @@ public class adminAddBookingPage extends HttpServlet {
                 output.println("<h2>Arrival</h2>");
                 output.println("<div id=\"date\">");
                 output.println("<label>Arrival Date</label>");
-                output.println("<input type=\"date\" value=\"" + LocalDate.now() + "\" name=\"arrival\">");
+                output.println("<input type=\"date\" value=\"" + LocalDate.now() + "\" name=\"arrival\" onchange=\"updateSubmitButton()\">");
                 output.println("<br>");
-                output.println("<label>Departure Date</label> <input type=\"date\" name=\"departure\">");
+                output.println("<label>Departure Date</label> <input type=\"date\" name=\"departure\" onchange=\"updateSubmitButton()\">");
                 output.println("</div>");
-
-                output.println("<input type=\"submit\" value=\"Book a Room\">");
+                output.println("<input type='hidden' name='hid' value='" + request.getParameter("hid") + "'>");
                 output.println("<input type='hidden' name='action' value='admin'>");
                 output.println("<input type='hidden' name='rid' value='" + request.getParameter("rid") + "'>");
+                output.println("<input type=\"submit\" value=\"Book the room\" id=\"findRoomButton\">");
                 output.println("</form>");
                 output.println("</div>");
                 output.println("</div>");
                 output.println("<div id=\"filtered-rooms\">");
+                output.println("OK?");
             } catch (Exception err) {
                 output.println(err.getMessage());
             }
+        } catch (Exception err) {
+            response.getWriter().println(err.getMessage());
         }
     }
 

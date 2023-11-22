@@ -27,13 +27,35 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Book a room</title>
         <link rel="stylesheet" href="css/bookARoom.css" type="text/css">
+
+        <script>
+            function updateSubmitButton() {
+                var arrivalDate = document.getElementsByName("arrival")[0].value;
+                var departureDate = document.getElementsByName("departure")[0].value;
+                var submitButton = document.getElementById("findRoomButton");
+
+                // Calculate dateCompare based on arrivalDate and departureDate
+                var dateCompare = new Date(departureDate) - new Date(arrivalDate);
+
+                // Update the "disabled" attribute based on dateCompare value
+                submitButton.disabled = (dateCompare <= 0);
+            }
+
+            // Call the function when the page loads
+            window.onload = function () {
+                updateSubmitButton();
+            };
+            
+        </script>
     </head>
     <body>
+
         <jsp:include page="LoggedInUserNavBar.jsp"></jsp:include>
         <%
             Connection connection = (Connection) session.getAttribute("connection");
             Statement statement = (Statement) session.getAttribute("statement");
             ResultSet rs = null;
+
             PrintWriter output = response.getWriter();
             output.println("<div id=\"center-div\">");
             output.println("<div id=\"filter-rooms-form\">");
@@ -42,36 +64,38 @@
             output.println("<h2>Choose the location</h2>");
             output.println("<select name=\"selection\">");
             output.println("<option value=\"1\">Abu Dhabi</option>");
-            output.println("<option value=\"2\">New York</option>");
+            output.println("<option value=\"2\" >New York</option>");
             output.println("<option value=\"3\">Paris</option>");
             output.println("</select>");
             output.println("<h2>Arrival</h2>");
             output.println("<div id=\"date\">");
             output.println("<label>Arrival Date</label>");
-            output.println("<input type=\"date\" value=\"" + LocalDate.now() + "\" name=\"arrival\">");
+            output.println("<input type=\"date\" value=\"" + (session.getAttribute("arrivalDate") != null ? session.getAttribute("arrivalDate") : LocalDate.now()) + "\" name=\"arrival\" onchange=\"updateSubmitButton()\">");
             output.println("<br>");
-            output.println("<label>Departure Date</label> <input type=\"date\" name=\"departure\">");
+            output.println("<label>Departure Date</label> <input type=\"date\" name=\"departure\" value=\"" + (session.getAttribute("departureDate") != null ? session.getAttribute("departureDate") : "") + "\" onchange=\"updateSubmitButton()\">");
             output.println("</div>");
-            output.println("<input type=\"submit\" value=\"Find a room\">");
+            output.println("<input type=\"submit\" value=\"Find a room\" id=\"findRoomButton\">");
             output.println("</form>");
             output.println("</div>");
             output.println("</div>");
             output.println("<div id=\"filtered-rooms\">");
             try {
                 int hotel_location;
-                if (((String)session.getAttribute("selection")) == null) {
+                if (((String) session.getAttribute("selection")) == null) {
                     hotel_location = 1;
                 } else {
-                    hotel_location = Integer.parseInt(((String)session.getAttribute("selection")));
+                    hotel_location = Integer.parseInt(((String) session.getAttribute("selection")));
                 }
                 ArrayList<Integer> occupiedRooms = (ArrayList<Integer>) session.getAttribute("occupiedRooms");
-//                response.getWriter().println(occupiedRooms == null);
+
                 if (occupiedRooms != null) {
                     int RID = 0;
                     int arrayListIndex = 0;
                     int arrayListSize = occupiedRooms.size();
                     String arrivalDate = (String) session.getAttribute("arrivalDate");
                     String departureDate = (String) session.getAttribute("departureDate");
+                    int dateCompare = departureDate.compareTo(arrivalDate);
+
                     rs = statement.executeQuery("SELECT RID, Type, Room.`Room#`, Price, Location FROM Room, Hotel WHERE Room.HID = " + hotel_location + " AND Hotel.HID =" + hotel_location);
                     while (rs.next()) {
                         RID = Integer.parseInt(rs.getString("RID"));
@@ -104,5 +128,6 @@
             output.println("</div>");
 
         %>
+
     </body>
 </html>

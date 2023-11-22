@@ -24,7 +24,7 @@
             <ul>
                 <li><a href="index.html">Home</a></li>
                 <li><a href="#">Locations</a></li>
-                <li><a href="aboutUs.html">About Us</a></li>
+                <li><a href="aboutUs.jsp">About Us</a></li>
                 <li><a href="#">Log In</a></li>
             </ul>
         </div>

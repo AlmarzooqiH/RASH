@@ -42,7 +42,7 @@ public class loginOrSignupServlet extends HttpServlet {
 
                 if (result.next()) {
                     if (result.getString("TYPE").equals("ADMIN")) {
-                        response.sendRedirect(request.getContextPath() + "/admin.jsp");
+                        response.sendRedirect(request.getContextPath() + "/adminbookings.jsp");
                     } else {
                         response.sendRedirect(request.getContextPath() + "/landing.jsp");
                     }

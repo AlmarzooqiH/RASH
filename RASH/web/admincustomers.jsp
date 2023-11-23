@@ -15,9 +15,9 @@
         Statement statement = (Statement) session.getAttribute("statement");
         output.println("<body>");
         output.println("<header>");
-        output.println("<div class='tab'>");
-        output.println("<a href='admin.jsp'>Rooms</a>");
-        output.println("</div>");
+//        output.println("<div class='tab'>");
+//        output.println("<a href='admin.jsp'>Rooms</a>");
+//        output.println("</div>");
         output.println("<div class='tab'>");
         output.println("<a href='adminbookings.jsp'>Bookings</a>");
         output.println("</div>");

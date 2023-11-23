@@ -38,14 +38,18 @@
                 var dateCompare = new Date(departureDate) - new Date(arrivalDate);
 
                 // Update the "disabled" attribute based on dateCompare value
-                submitButton.disabled = (dateCompare <= 0);
+                submitButton.disabled = (dateCompare <= 0) || (departureDate == null) || (departureDate == '');
+
+                // If the button is not disabled, click it
+//                if (!submitButton.disabled) {
+//
+//                    // Remove the event listener after the button is clicked
+////                    window.removeEventListener('load', updateSubmitButton);
+//                }
             }
 
-            // Call the function when the page loads
-            window.onload = function () {
-                updateSubmitButton();
-            };
-            
+            // Add the event listener for the first load
+            window.addEventListener('load', updateSubmitButton);
         </script>
     </head>
     <body>
@@ -62,10 +66,11 @@
             output.println("<form action=\"CheckAvailableRooms\" method=\"GET\" id=\"filter\">");
             output.println("<div id=\"center-elements\">");
             output.println("<h2>Choose the location</h2>");
+            String selectedValue = (String) request.getSession().getAttribute("selection");
             output.println("<select name=\"selection\">");
-            output.println("<option value=\"1\">Abu Dhabi</option>");
-            output.println("<option value=\"2\" >New York</option>");
-            output.println("<option value=\"3\">Paris</option>");
+            output.println("<option value=\"1\"" + (selectedValue != null && selectedValue.equals("1") ? " selected" : "") + ">Abu Dhabi</option>");
+            output.println("<option value=\"2\"" + (selectedValue != null && selectedValue.equals("2") ? " selected" : "") + ">New York</option>");
+            output.println("<option value=\"3\"" + (selectedValue != null && selectedValue.equals("3") ? " selected" : "") + ">Paris</option>");
             output.println("</select>");
             output.println("<h2>Arrival</h2>");
             output.println("<div id=\"date\">");
@@ -86,37 +91,38 @@
                 } else {
                     hotel_location = Integer.parseInt(((String) session.getAttribute("selection")));
                 }
-                ArrayList<Integer> occupiedRooms = (ArrayList<Integer>) session.getAttribute("occupiedRooms");
+                ArrayList<Integer> availableRooms = (ArrayList<Integer>) session.getAttribute("availableRooms");
 
-                if (occupiedRooms != null) {
+                if (availableRooms != null) {
                     int RID = 0;
                     int arrayListIndex = 0;
-                    int arrayListSize = occupiedRooms.size();
+                    int arrayListSize = availableRooms.size();
                     String arrivalDate = (String) session.getAttribute("arrivalDate");
                     String departureDate = (String) session.getAttribute("departureDate");
                     int dateCompare = departureDate.compareTo(arrivalDate);
 
                     rs = statement.executeQuery("SELECT RID, Type, Room.`Room#`, Price, Location FROM Room, Hotel WHERE Room.HID = " + hotel_location + " AND Hotel.HID =" + hotel_location);
+//                    output.println(availableRooms.size);
                     while (rs.next()) {
                         RID = Integer.parseInt(rs.getString("RID"));
-                        if ((arrayListIndex < arrayListSize) && (!occupiedRooms.isEmpty()) && (occupiedRooms.get(arrayListIndex) == RID)) {
-                            arrayListIndex++;
-                            continue;
+                        if ((arrayListIndex < arrayListSize) && (!availableRooms.isEmpty()) && (availableRooms.contains(RID))) {
+                            output.println(""
+                                    + "<form action=\"ProcessBooking\" method=\"POST\" class=\"rooms\">"
+                                    + "<img src=\"css/Images/Hotel-Room.jpg\" alt=\"Dummy Image\">"
+                                    + "<div class=\"room-type\"><label>Room type: </label><strong>" + rs.getString("Type") + "</strong></div>"
+                                    + "<div class=\"room-number\"><label>Room Number: </label><strong>" + rs.getString("Room#") + "</strong></div>"
+                                    + "<div class=\"location\"><label>Location: </label><strong>" + rs.getString("Location") + "</strong></div>"
+                                    + "<label class=\"price\">" + rs.getString("Price") + " DHS"  + "</label>"
+                                    + "<input type=\"hidden\" name=\"selectedRoom\" value=\"" + rs.getString("Room#") + "\"/>"
+                                    + "<input type=\"hidden\" name=\"arrivalDate\" value=\"" + arrivalDate + "\">"
+                                    + "<input type=\"hidden\" name=\"departureDate\" value=\"" + departureDate + "\">"
+                                    + "<input type=\"hidden\" name=\"rid\" value=\"" + RID + "\">"
+                                    + "<input type=\"hidden\" name=\"hid\" value=\"" + hotel_location + "\">"
+                                    + "<input type=\"hidden\" name=\"action\" value=\"customer\">"
+                                    + "<input type=\"submit\" value=\"Book\" class=\"book-btn\">"
+                                    + "</form>");
                         }
-                        output.println(""
-                                + "<form action=\"ProcessBooking\" method=\"POST\" class=\"rooms\">"
-                                + "<img src=\"css/Images/Hotel-Room.jpg\" alt=\"Dummy Image\">"
-                                + "<div class=\"room-type\"><label>Room type: </label><strong>" + rs.getString("Type") + "</strong></div>"
-                                + "<div class=\"room-number\"><label>Room Number: </label><strong>" + rs.getString("Room#") + "</strong></div>"
-                                + "<div class=\"location\"><label>Location: </label><strong>" + rs.getString("Location") + "</strong></div>"
-                                + "<label class=\"price\">" + rs.getString("Price") + "</label>"
-                                + "<input type=\"hidden\" name=\"selectedRoom\" value=\"" + rs.getString("Room#") + "\"/>"
-                                + "<input type=\"hidden\" name=\"arrivalDate\" value=\"" + arrivalDate + "\">"
-                                + "<input type=\"hidden\" name=\"departureDate\" value=\"" + departureDate + "\">"
-                                + "<input type=\"hidden\" name=\"hid\" value=\"" + hotel_location + "\">"
-                                + "<input type=\"hidden\" name=\"action\" value=\"customer\">"
-                                + "<input type=\"submit\" value=\"Book\" class=\"book-btn\">"
-                                + "</form>");
+                        arrayListIndex++;
                     }
                 } else {
                     output.println("<h1>Please select a date.</h1>");

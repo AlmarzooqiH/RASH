@@ -98,16 +98,17 @@ public class ProcessBooking extends HttpServlet {
 //            response.getWriter().println(rs.getString("CID"));
             if (rs.next()) {
                 int customerID = Integer.parseInt(rs.getString("CID"));
-                int roomID = Integer.parseInt(request.getParameter("selectedRoom"));
+//                int roomID = Integer.parseInt(request.getParameter("selectedRoom"));
                 int hid = Integer.parseInt(request.getParameter("hid"));
                 String arrival = request.getParameter("arrivalDate");
                 String departure = request.getParameter("departureDate");
-                stmt.executeUpdate("INSERT INTO `Booking`(`Arrival`, `Departure`, `CID`, `RID`, `HID`) VALUES ('" + arrival + "','" + departure + "','" + customerID + "','" + roomID + "','" + hid + "')");
+                String RID = request.getParameter("rid");
+                stmt.executeUpdate("INSERT INTO `Booking`(`Arrival`, `Departure`, `CID`, `RID`, `HID`) VALUES ('" + arrival + "','" + departure + "','" + customerID + "','" + RID + "','" + hid + "')");
             }
 
             session.setAttribute("connection", con);
             session.setAttribute("statement", stmt);
-            response.sendRedirect(request.getContextPath() + "/booking.jsp");
+            response.sendRedirect(request.getContextPath() + "/myBookings.jsp");
         } catch (Exception err) {
             System.err.println(err);
             response.getWriter().println(err);

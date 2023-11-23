@@ -14,10 +14,7 @@ import javax.servlet.http.*;
 import java.sql.*;
 import java.util.ArrayList;
 
-/**
- *
- * @author truedeveloper
- */
+
 @WebServlet(urlPatterns = {"/CheckAvailableRooms"})
 public class CheckAvailableRooms extends HttpServlet {
 
@@ -38,17 +35,20 @@ public class CheckAvailableRooms extends HttpServlet {
         Connection connection = (Connection) session.getAttribute("connection");
         Statement statement = (Statement) session.getAttribute("statement");
         ResultSet rs = null;
-        ArrayList<Integer> occupiedRooms = new ArrayList<Integer>();
+        ArrayList<Integer> availableRooms = new ArrayList<Integer>();
         try {
-            rs = statement.executeQuery("SELECT RID FROM BOOKING WHERE ARRIVAL='" + request.getParameter("arrival") + "' AND Departure ='" + request.getParameter("departure") + "';");
+            String arrivalDate = request.getParameter("arrival");
+            String departureDate = request.getParameter("departure");
+            rs = statement.executeQuery("SELECT ROOM.RID FROM ROOM LEFT JOIN Booking ON ROOM.RID = Booking.RID WHERE (Booking.RID IS NULL OR (Booking.Departure < '" + arrivalDate + "' AND Booking.Arrival > '" + departureDate + "') OR Booking.BID IS NULL)");
+
             if (rs != null) {
                 while (rs.next()) {
-                    occupiedRooms.add(Integer.parseInt(rs.getString("RID")));
+                    availableRooms.add(Integer.parseInt(rs.getString("RID")));
                 }
             }
             session.setAttribute("connection", connection);
             session.setAttribute("statement", statement);
-            session.setAttribute("occupiedRooms", occupiedRooms);
+            session.setAttribute("availableRooms", availableRooms);
             session.setAttribute("arrivalDate", request.getParameter("arrival"));
             session.setAttribute("departureDate", request.getParameter("departure"));
             session.setAttribute("selection", request.getParameter("selection"));

@@ -14,10 +14,7 @@ import java.sql.*;
 import java.time.LocalDate;
 import javax.servlet.http.HttpSession;
 
-/**
- *
- * @author truedeveloper
- */
+
 @WebServlet(urlPatterns = {"/adminAddBookingPage"})
 public class adminAddBookingPage extends HttpServlet {
 
@@ -38,7 +35,11 @@ public class adminAddBookingPage extends HttpServlet {
             Connection connection = (Connection) session.getAttribute("connection");
             Statement statement = (Statement) session.getAttribute("statement");
             try {
-                ResultSet rs = statement.executeQuery("SELECT AID,CID FROM CUSTOMER");
+                ResultSet rs = statement.executeQuery("SELECT Location FROM Hotel WHERE HID = " + request.getParameter("hid"));
+                if (rs.next()) {
+                    output.println("<h1>Selected location: " + rs.getString("Location") + "</h1>");
+                }
+                rs = statement.executeQuery("SELECT AID,CID FROM CUSTOMER");
                 output.println("<script>");
                 output.println("function updateSubmitButton() {");
                 output.println("var arrivalDate = document.getElementsByName('arrival')[0].value;");
@@ -74,7 +75,6 @@ public class adminAddBookingPage extends HttpServlet {
                 output.println("</div>");
                 output.println("</div>");
                 output.println("<div id=\"filtered-rooms\">");
-                output.println("OK?");
             } catch (Exception err) {
                 output.println(err.getMessage());
             }

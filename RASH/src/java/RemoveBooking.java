@@ -13,10 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.sql.*;
 
-/**
- *
- * @author truedeveloper
- */
+
 @WebServlet(urlPatterns = {"/RemoveBooking"})
 public class RemoveBooking extends HttpServlet {
 

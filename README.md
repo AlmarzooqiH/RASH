@@ -1,8 +1,8 @@
 # RASH Stands for:
-# R: Rashid
-# A: Abdullah
-# S: Samneh
-# H: Hamad
+- R: Rashid
+- A: Abdullah
+- S: Samneh
+- H: Hamad
 
 # Founders of Rash:
 # Hamad

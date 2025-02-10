@@ -1,3 +1,9 @@
+# RASH Stands for:
+# R: Rashid
+# A: Abdullah
+# S: Samneh
+# H: Hamad
+
 # Founders of Rash:
 # Hamad
 ![e31c8edb-fcd0-495c-8d85-b68a452c8c93](https://github.com/AlmarzooqiH/RASH/assets/80675793/73277d08-3c3c-4e3a-ad43-e6e984f9e606)
